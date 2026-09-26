@@ -3,16 +3,16 @@
 
 | Plugin | Version | Skills | MCPs | Companions |
 |---|---|---|---|---|
-| **core** | 1.0.1 | `context-keeper`, `learning`, `i-have-adhd` | - | - |
-| **build** | 1.0.0 | `intake`, `recon`, `planning`, `build-tdd`, `audit`, `debug`, `deploy`, `security` | `context7` | `superpowers`, `ponytail`, `cloudflare` |
-| **design** | 1.0.0 | `website-builder`, `ui-standards`, `ui-mate`, `frontend-design`, `emil-design-eng`, `apple-design`, `animation-vocabulary`, `animate`, `find-animation-opportunities`, `review-animations`, `prototype` | `playwright` | `taste-skill`, `impeccable` |
+| **core** | 1.0.2 | `context-keeper`, `learning`, `i-have-adhd` | - | - |
+| **build** | 1.0.1 | `intake`, `recon`, `planning`, `build-tdd`, `audit`, `debug`, `deploy`, `security` | `context7` | `superpowers`, `ponytail`, `cloudflare` |
+| **design** | 1.0.1 | `website-builder`, `ui-standards`, `ui-mate`, `frontend-design`, `emil-design-eng`, `apple-design`, `animation-vocabulary`, `animate`, `find-animation-opportunities`, `review-animations`, `prototype` | `playwright` | `taste-skill`, `impeccable` |
 
 ## Profiles
 
 | Profile | Plugins |
 |---|---|
-| `website` | core, design, taste-skill, impeccable |
-| `webapp` | core, build, design, superpowers, ponytail, taste-skill, impeccable |
+| `website` | core, design, taste-skill |
+| `webapp` | core, build, design, superpowers, ponytail, taste-skill |
 | `app` | core, build, design, superpowers, ponytail |
 | `extension` | core, build, superpowers, ponytail |
 | `api` | core, build, superpowers, ponytail |
@@ -28,6 +28,13 @@
 - `find-animation-opportunities` from `github:emilkowalski/skills@d16ebe60d09a5ba2afcb7054ede9d0a10c9f6128:skills/find-animation-opportunities`
 - `review-animations` from `github:emilkowalski/skills@d16ebe60d09a5ba2afcb7054ede9d0a10c9f6128:skills/review-animations`
 - `prototype` from `github:emilkowalski/skills@d16ebe60d09a5ba2afcb7054ede9d0a10c9f6128:skills/prototype`
+
+## MCP servers
+
+- `context7` (build) @upstash/context7-mcp@4.1.1  
+  **Accepted risk:** transitive npm dependencies are not integrity-pinned or scanned
+- `playwright` (design) @playwright/mcp@0.0.82  
+  **Accepted risk:** transitive npm dependencies are not integrity-pinned or scanned
 
 ## External plugins
 
@@ -49,12 +56,12 @@
 | skill `recon` | PASS | 0 | 0 | 2 | 2026-09-25 |
 | skill `planning` | PASS | 0 | 0 | 0 | 2026-09-25 |
 | skill `build-tdd` | PASS | 0 | 0 | 0 | 2026-09-25 |
-| skill `audit` | PASS | 0 | 0 | 0 | 2026-09-25 |
+| skill `audit` | PASS | 0 | 0 | 0 | 2026-09-26 |
 | skill `debug` | PASS | 0 | 0 | 0 | 2026-09-25 |
 | skill `deploy` | PASS | 0 | 0 | 0 | 2026-09-25 |
 | skill `security` | PASS | 0 | 0 | 0 | 2026-09-25 |
 | skill `website-builder` | PASS | 7 | 0 | 0 | 2026-09-25 |
-| skill `ui-standards` | PASS | 24 | 0 | 0 | 2026-09-25 |
+| skill `ui-standards` | PASS | 24 | 0 | 0 | 2026-09-26 |
 | skill `ui-mate` | PASS | 10 | 0 | 0 | 2026-09-25 |
 | skill `frontend-design` | PASS | 0 | 0 | 1 | 2026-09-25 |
 | skill `emil-design-eng` | PASS | 0 | 0 | 0 | 2026-09-25 |

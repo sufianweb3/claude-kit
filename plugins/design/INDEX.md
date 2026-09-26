@@ -31,4 +31,4 @@ Website and UI work: creative process, reference boards, era floor standards, co
 | Plugin | Use when | Not for |
 |---|---|---|
 | `taste-skill` | choosing ONE deliberate visual direction, generating concept comps or a brand kit, converting an image to code, or a redesign pass. | blending several directions on one page, or as evidence on a reference board (generated comps are concepts, not proof). |
-| `impeccable` | the critique pass after a UI build, before calling any page done, or when the user says it looks generic. | early concept work before anything is built. |
+| `impeccable` | the critique pass after a UI build, before calling any page done, or when the user says it looks generic. | early concept work before anything is built. Opt-in per project, not in any default profile; offered only when the user asks for design critique. |

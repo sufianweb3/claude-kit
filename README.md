@@ -45,17 +45,3 @@ One repo that feeds every project: skills, MCP servers, external plugins, routin
 | `/handoff` when stopping | Project session |
 | `/close` at a milestone: verifies every requirement, collects lessons as a KIT PROPOSAL | Project session |
 | Paste the KIT PROPOSAL / "check for updates" | Maintainer session |
-
-## Fallback (if a web session does not load marketplace plugins)
-
-Copy `install/sync-kit.sh` to the project's `.claude/` and add to `.claude/settings.json`:
-
-```json
-{
-  "hooks": {
-    "SessionStart": [
-      { "hooks": [{ "type": "command", "command": "bash .claude/sync-kit.sh core design" }] }
-    ]
-  }
-}
-```

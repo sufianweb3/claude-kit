@@ -5,7 +5,10 @@
       "args": [
         "-y",
         "@upstash/context7-mcp@4.1.1"
-      ]
+      ],
+      "env": {
+        "npm_config_ignore_scripts": "true"
+      }
     }
   }
 }

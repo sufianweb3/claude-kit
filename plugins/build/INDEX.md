@@ -9,7 +9,7 @@ Software work: apps, SaaS, web apps, extensions and APIs. Intake to deploy pipel
 | `recon` | before planning in any existing codebase, onboarding to an unfamiliar repo, or when facts about schema, config or conventions are needed. | empty or brand-new repos with nothing to map, or a question answerable from one or two file reads. |
 | `planning` | after intake for any feature or phase, any non-trivial change request, or before touching a CRITICAL area. | trivial edits, or brainstorming open-ended ideas before requirements exist (use superpowers:brainstorming). |
 | `build-tdd` | implementing any feature, fix or refactor in code. | visual design exploration before a board is approved, or copy-only edits. |
-| `audit` | after each build step, before anything merges, or whenever correctness or code quality is in doubt. | visual design critique (use /impeccable critique or review-animations). |
+| `audit` | after each build step, before anything merges, or whenever correctness or code quality is in doubt. | visual design critique (use review-animations, or /impeccable critique if that plugin is enabled). |
 | `debug` | any bug, error or unexpected behaviour, and any change to existing code ('change X', 'add to X', 'X is broken'). | greenfield code with nothing existing to break. |
 | `deploy` | shipping, deploying, releasing, rolling back, setting up CI/CD or environments, or writing migrations. | local dev server setup or Cloudflare platform specifics (use the cloudflare plugin alongside). |
 | `security` | auditing auth, payments or user-data code, before any ship, or whenever secrets, keys, external input, wallets or contracts are involved. | UI-only changes with no data, auth or input surface. |

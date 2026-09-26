@@ -81,7 +81,7 @@ every other AI site", so nothing else in the pipeline catches it. Answer these h
   card on an otherwise default page?
 
 Two or more yeses: stop and reshape the page, do not ship it and offer to improve it later. Then run a real
-critique with the installed design skills (`/impeccable critique` or `/impeccable audit`, `taste-skill`'s
+critique with the installed design skills (`/impeccable critique` or `/impeccable audit` if that plugin is enabled, `taste-skill`'s
 redesign pass, `review-animations` for motion) - a second opinion from a tool built for it beats your own read of your own work.
 
 **A supplied brand is not a design.** A client palette and font pairing fixes colour and type - it says

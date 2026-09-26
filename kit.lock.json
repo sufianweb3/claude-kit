@@ -1,16 +1,16 @@
 {
   "plugins": {
     "core": {
-      "version": "1.0.1",
-      "hash": "c48c0d08f9986db6"
+      "version": "1.0.2",
+      "hash": "9ab1992ebb7a28fb"
     },
     "build": {
-      "version": "1.0.0",
-      "hash": "9c84f4487c1cb203"
+      "version": "1.0.1",
+      "hash": "b3c7dabfa85994b3"
     },
     "design": {
-      "version": "1.0.0",
-      "hash": "bc49dc5dc2793139"
+      "version": "1.0.1",
+      "hash": "042e3f36819dbf68"
     }
   }
 }

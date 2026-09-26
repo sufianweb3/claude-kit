@@ -5,7 +5,8 @@
 - Never contradict an active decision. If one looks wrong, propose superseding it with `/decide`.
 - Scope changes only from the user, recorded in REQUIREMENTS and DECISIONS.
 - Record decisions with `/decide` as they happen. End sessions with `/handoff`.
-- Web sessions run in a throwaway container: anything not committed **and pushed** is lost when the session ends. Push `.claude/settings.json`, `docs/context/` and code to the default branch before stopping. Never end a session with unpushed work.
+- Web sessions run in a throwaway container: anything not committed **and pushed** is lost when the session ends. Push `.claude/settings.json`, `docs/context/` and code to the current working branch before stopping. Never end a session with unpushed work.
+- Never push directly to main. If the current branch is main, create a working branch first. Merging to main requires the user's explicit yes.
 - `.claude/settings.json` loads the kit. It must stay committed; plugin changes take effect in the next session.
 - Kit skills and MCPs are routed by the tables printed at session start. Follow them.
 <!-- kit:end -->

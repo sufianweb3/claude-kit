@@ -15,6 +15,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -194,8 +195,11 @@ def validate(reg: dict) -> list[str]:
             continue
         routing("skill", s, ("summary", "when", "not_when"))
         src = s.get("source", "")
-        if src != "local" and not GH_RE.match(src):
-            e.append(f"skill '{sid}': source must be 'local' or 'github:owner/repo@ref:path'")
+        gh = GH_RE.match(src)
+        if src != "local" and not gh:
+            e.append(f"skill '{sid}': source must be 'local' or 'github:owner/repo@<sha>:path'")
+        elif gh and not re.fullmatch(r"[0-9a-f]{40}", gh.group(2) or ""):
+            e.append(f"skill '{sid}': vendored source must pin a full 40-char commit sha after @ (no tag, branch or short sha)")
         if not (skill_dir(s) / "SKILL.md").is_file():
             hint = f" (run: kit.py vendor {sid})" if src.startswith("github:") else ""
             e.append(f"skill '{sid}': {skill_dir(s).relative_to(ROOT)}/SKILL.md not found{hint}")
@@ -275,8 +279,8 @@ def validate(reg: dict) -> list[str]:
 
     ext_ids = {x.get("id") for x in reg.get("external", [])}
     for x in reg.get("external", []):
-        if x.get("sha") and not re.fullmatch(r"[0-9a-f]{40}", x["sha"]):
-            e.append(f"external '{x.get('id')}': sha must be a full 40-char commit")
+        if not re.fullmatch(r"[0-9a-f]{40}", x.get("sha") or ""):
+            e.append(f"external '{x.get('id')}': sha is required and must be a full 40-char commit")
     for s in reg.get("skill", []):
         for o in s.get("overrides", []):
             if ":" not in o or o.split(":", 1)[0] not in ext_ids:
@@ -431,6 +435,9 @@ def catalog_md(reg: dict, lock: dict, plan: "Plan") -> str:
     out += ["", "## Vendored skills", ""]
     vend = [s for s in reg.get("skill", []) if s.get("source", "").startswith("github:")]
     out += [f"- `{s['id']}` from `{s['source']}`" for s in vend] or ["None."]
+    out += ["", "## MCP servers", ""]
+    out += [f"- `{m['id']}` ({m['plugin']}) {npx_package(m) or m.get('url') or m.get('command')}"
+            + (f"  \n  **Accepted risk:** {m['risk']}" if m.get("risk") else "") for m in reg.get("mcp", [])] or ["None."]
     out += ["", "## External plugins", ""]
     out += [f"- `{x['id']}` github:{x['repo']} @ {x.get('sha', 'unpinned')[:8]}" + (f"  \n  **Accepted risk:** {x['risk']}" if x.get("risk") else "") for x in reg.get("external", [])] or ["None."]
     out += ["", "## Audits (SkillSpector + reviewed baseline)", "", "| Item | Status | Score (raw) | Active H/C | Suppressed | Scanned |", "|---|---|---|---|---|---|"]
@@ -883,6 +890,33 @@ EMBED_SKIP = (".git", ".done", "skills", "node_modules", "tests", "docs", "bench
               "research", "assets", "*.png", "*.jpg", "*.gif", "*.webp", "*.mp4")
 
 
+def contained(p: Path, base: Path, what: str) -> Path:
+    """Resolve p and require it to stay inside base (its checkout); exit otherwise."""
+    r = p.resolve()
+    if not r.is_relative_to(base.resolve()):
+        sys.exit(f"embed: {what} resolves outside its checkout ({base}): {r}")
+    return r
+
+
+def reject_symlinks(src: Path, skip: tuple[str, ...] = (".git",)) -> None:
+    """Fail on any symlink in what a copy of src (minus skip patterns) would include."""
+    ignore = shutil.ignore_patterns(*skip)
+    if src.is_symlink():
+        sys.exit(f"embed: symlink rejected: {src}")
+    for d, dirs, names in os.walk(src):
+        dropped = ignore(d, dirs + names)
+        dirs[:] = [x for x in dirs if x not in dropped]
+        for n in dirs + [x for x in names if x not in dropped]:
+            if os.path.islink(os.path.join(d, n)):
+                sys.exit(f"embed: symlink rejected: {Path(d, n)}")
+
+
+def copytree_strict(src: Path, dst: Path, skip: tuple[str, ...] = (".git",)) -> None:
+    """copytree that fails on any symlink instead of copying or following it."""
+    reject_symlinks(src, skip)
+    shutil.copytree(src, dst, symlinks=False, ignore=shutil.ignore_patterns(*skip))
+
+
 def fetch_external(x: dict) -> Path:
     """Checkout an external plugin at its pinned sha; return the plugin root."""
     cache = Path.home() / ".cache" / "claude-kit" / "ext" / f"{x['id']}-{x['sha'][:12]}"
@@ -900,7 +934,7 @@ def fetch_external(x: dict) -> Path:
         plugins = json.loads(mp.read_text(encoding="utf-8")).get("plugins", [])
         hit = [p for p in plugins if p.get("name") == x["id"]] or plugins[:1]
         if hit and isinstance(hit[0].get("source"), str):
-            root = (cache / hit[0]["source"]).resolve()
+            root = contained(cache / hit[0]["source"], cache, f"external '{x['id']}' plugin source")
     if not (root / ".claude-plugin" / "plugin.json").is_file():
         sys.exit(f"external '{x['id']}': no .claude-plugin/plugin.json at {root}")
     return root
@@ -908,24 +942,37 @@ def fetch_external(x: dict) -> Path:
 
 def plugin_parts(root: Path) -> dict:
     """Resolve a plugin's skills, commands, agents, hooks and MCP servers."""
-    man = json.loads((root / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8"))
+    man_f = root / ".claude-plugin" / "plugin.json"
+    if man_f.is_symlink():
+        sys.exit(f"embed: symlink rejected: {man_f}")
+    man = json.loads(contained(man_f, root, "plugin.json").read_text(encoding="utf-8"))
+
+    def nolink(p: Path) -> Path:
+        if p.is_symlink():
+            sys.exit(f"embed: symlink rejected: {p}")
+        return p
 
     def dirs(key: str, default: str) -> list[Path]:
         v = man.get(key, default)
-        return [root / p for p in (v if isinstance(v, list) else [v]) if isinstance(p, str)]
+        return [contained(nolink(root / p), root, f"plugin '{key}' path") for p in (v if isinstance(v, list) else [v])
+                if isinstance(p, str)]
 
     def obj(key: str, default: str, inner: str) -> dict:
         v = man.get(key, default)
         if isinstance(v, dict):
             return v.get(inner, v)
-        f = root / v
+        f = contained(nolink(root / v), root, f"plugin '{key}' file")
         return json.loads(f.read_text(encoding="utf-8")).get(inner, {}) if f.is_file() else {}
 
+    def files(key: str) -> list[Path]:
+        out = [f for p in dirs(key, key) if p.is_dir() for f in sorted(p.glob("*.md"))]
+        return [contained(nolink(f), root, f"plugin {key[:-1]}") for f in out]
+
     return {
-        "skills": [d for p in dirs("skills", "skills") if p.is_dir()
+        "skills": [contained(nolink(d), root, "plugin skill") for p in dirs("skills", "skills") if p.is_dir()
                    for d in sorted(p.iterdir()) if (d / "SKILL.md").is_file()],
-        "commands": [f for p in dirs("commands", "commands") if p.is_dir() for f in sorted(p.glob("*.md"))],
-        "agents": [f for p in dirs("agents", "agents") if p.is_dir() for f in sorted(p.glob("*.md"))],
+        "commands": files("commands"),
+        "agents": files("agents"),
         "hooks": obj("hooks", "hooks/hooks.json", "hooks"),
         "mcp": obj("mcpServers", ".mcp.json", "mcpServers"),
     }
@@ -950,9 +997,23 @@ def cmd_embed(a) -> None:
         if pid not in local and pid not in ext:
             sys.exit(f"unknown plugin '{pid}'")
 
+    # 0. resolve every source and reject symlinks before anything in the project is touched
+    sources: dict[str, tuple[Path, str, dict]] = {}
+    for pid in wanted:
+        if pid in local:
+            src, ver = contained(ROOT / "plugins" / pid, ROOT, f"plugin '{pid}'"), json.loads(
+                (ROOT / "plugins" / pid / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8")).get("version", "")
+        else:
+            src, ver = fetch_external(ext[pid]), ext[pid]["sha"][:12]
+        parts = plugin_parts(src)
+        reject_symlinks(src, EMBED_SKIP)
+        for sk in parts["skills"]:
+            reject_symlinks(sk)
+        sources[pid] = (src, ver, parts)
+
     # 1. remove everything the previous embed wrote
     for rel in old.get("files", []):
-        p = proj / rel
+        p = contained((proj / rel).parent, proj, f"kit.json entry '{rel}'") / (proj / rel).name
         if p.is_symlink() or p.is_file():
             p.unlink()
         elif p.is_dir():
@@ -975,17 +1036,11 @@ def cmd_embed(a) -> None:
         seen[key] = pid
 
     for pid in wanted:
-        if pid in local:
-            src, ver = ROOT / "plugins" / pid, json.loads(
-                (ROOT / "plugins" / pid / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8")).get("version", "")
-        else:
-            src, ver = fetch_external(ext[pid]), ext[pid]["sha"][:12]
+        src, ver, parts = sources[pid]
         installed[pid] = ver
-        parts = plugin_parts(src)
         dst = kdir / "plugins" / pid
         # plugin root minus its skills; skills/ points at .claude/skills so hook paths still resolve
-        shutil.copytree(src, dst, symlinks=True,
-                        ignore=shutil.ignore_patterns(*EMBED_SKIP))
+        copytree_strict(src, dst, EMBED_SKIP)
         if parts["skills"]:
             rel_skills = parts["skills"][0].parent.relative_to(src)
             link = dst / rel_skills
@@ -996,7 +1051,7 @@ def cmd_embed(a) -> None:
             out = proj / ".claude" / "skills" / s.name
             if out.exists():
                 sys.exit(f"embed: .claude/skills/{s.name} already exists and is not managed by the kit")
-            shutil.copytree(s, out, symlinks=True, ignore=shutil.ignore_patterns(".git"))
+            copytree_strict(s, out)
             files.append(f".claude/skills/{s.name}")
         for kind, items in (("commands", parts["commands"]), ("agents", parts["agents"])):
             for f in items:
@@ -1045,8 +1100,14 @@ def cmd_embed(a) -> None:
     for event, groups in hooks.items():
         cur.setdefault(event, []).extend(groups)
     settings["hooks"] = {k: v for k, v in cur.items() if v}
-    if mcp:
-        settings["enableAllProjectMcpServers"] = True
+    settings.pop("enableAllProjectMcpServers", None)
+    kit_mcp = [m["id"] for m in reg.get("mcp", []) if m.get("plugin") in wanted]
+    ours = {m["id"] for m in reg.get("mcp", [])} | set(mcp) | set(old.get("mcp", []))
+    enabled = [n for n in settings.get("enabledMcpjsonServers", []) if n not in ours] + kit_mcp
+    if enabled:
+        settings["enabledMcpjsonServers"] = list(dict.fromkeys(enabled))
+    else:
+        settings.pop("enabledMcpjsonServers", None)
     sf.parent.mkdir(parents=True, exist_ok=True)
     sf.write_text(dumps(settings) + "\n", encoding="utf-8")
 

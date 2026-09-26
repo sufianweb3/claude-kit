@@ -43,13 +43,14 @@ Trigger: `/handoff`, or the user says wrap up, done for today, stopping here, sw
 1. Log unrecorded decisions (Decide) and surprising failures (`learning`).
 2. Update STATE: roadmap ticks, status, next up. Delete lines that are no longer true.
 3. Overwrite HANDOFF from `templates/HANDOFF.md`. **Next step** must be startable without asking: file path + action.
-4. Commit: `chore(context): handoff <short summary>` and push. Web sessions are discarded; unpushed work is lost.
+4. Commit: `chore(context): handoff <short summary>` and push to the current working branch. Web sessions are discarded; unpushed work is lost.
 
 ## Verify & close (end of a milestone or project)
 Walk every R-item. Tick only with evidence (`R3 ✓ src/auth/login.ts + tests/auth.test.ts`). Anything unbuilt is reported explicitly, never silently dropped. Then run `learning` close.
 
 ## Rules
 - Facts only. Plans the user has not agreed to are not state.
-- Never store secrets, tokens, client credentials or personal data.
+- Never store credentials of any kind (secrets, tokens, API keys, passwords, client logins), client personal data (names, emails, phone numbers, addresses, anything that identifies a person) or contract terms (fees, rates, payment terms, deadlines, penalties, clauses). Refer to where they live instead ("rate: see the signed contract"). `docs/context/` is committed and may be public.
+- Push to the current working branch only, never directly to main. If the current branch is main, create a working branch first. Merging to main requires the user's explicit yes.
 - Keep the caps. History lives in git and DECISIONS.
 - Paths over prose: `src/lib/auth.ts` beats "the auth file".

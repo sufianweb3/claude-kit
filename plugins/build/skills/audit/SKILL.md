@@ -1,6 +1,6 @@
 ---
 name: audit
-description: "Independent fresh-eyes review of a diff against the plan and requirements, ending in PASS or a numbered FIX list. Use when: after each build step, before anything merges, or whenever correctness or code quality is in doubt. Not for: visual design critique (use /impeccable critique or review-animations)."
+description: "Independent fresh-eyes review of a diff against the plan and requirements, ending in PASS or a numbered FIX list. Use when: after each build step, before anything merges, or whenever correctness or code quality is in doubt. Not for: visual design critique (use review-animations, or /impeccable critique if that plugin is enabled)."
 ---
 
 # Audit (fresh eyes)

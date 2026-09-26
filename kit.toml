@@ -45,7 +45,7 @@ description = "Software work: apps, SaaS, web apps, extensions and APIs. Intake 
 description = "Website and UI work: creative process, reference boards, era floor standards, components, motion and visual QA."
 
 # ── Skills: core ─────────────────────────────────────────────
-# source = "local" | "github:owner/repo@<sha|tag|branch>:path/to/skill"
+# source = "local" | "github:owner/repo@<full 40-char sha>:path/to/skill"
 
 [[skill]]
 id = "context-keeper"
@@ -113,7 +113,7 @@ plugin = "build"
 source = "local"
 summary = "Independent fresh-eyes review of a diff against the plan and requirements, ending in PASS or a numbered FIX list."
 when = "after each build step, before anything merges, or whenever correctness or code quality is in doubt."
-not_when = "visual design critique (use /impeccable critique or review-animations)."
+not_when = "visual design critique (use review-animations, or /impeccable critique if that plugin is enabled)."
 overrides = ["superpowers:requesting-code-review", "superpowers:receiving-code-review"]
 
 [[skill]]
@@ -264,6 +264,8 @@ plugin = "build"
 type = "stdio"
 command = "npx"
 args = ["-y", "@upstash/context7-mcp@4.1.1"]
+env = { npm_config_ignore_scripts = "true" }
+risk = "transitive npm dependencies are not integrity-pinned or scanned"
 when = "planning or writing code against a third-party library or API where version-specific docs matter, or when an API call fails in a way that suggests outdated knowledge."
 not_when = "plain language features, internal project code or general concepts."
 
@@ -273,6 +275,8 @@ plugin = "design"
 type = "stdio"
 command = "npx"
 args = ["-y", "@playwright/mcp@0.0.82"]
+env = { npm_config_ignore_scripts = "true" }
+risk = "transitive npm dependencies are not integrity-pinned or scanned"
 when = "visual QA of a running page (390, 768 and 1440 widths), checking animations render, reading console errors, or screenshotting real reference sites for a board."
 not_when = "unit tests or backend logic, or before anything is running to look at."
 
@@ -322,12 +326,12 @@ attach = "design"
 description = "Design critique and polish commands (/impeccable critique, audit, polish) with anti-pattern detection."
 when = "the critique pass after a UI build, before calling any page done, or when the user says it looks generic."
 risk = "Its launcher downloads and runs a native engine binary from the author's GitHub release on first use (sha256 checked against a same-origin sidecar). The binary is not scannable. Accepted 2026-09-25 pending user confirmation."
-not_when = "early concept work before anything is built."
+not_when = "early concept work before anything is built. Opt-in per project, not in any default profile; offered only when the user asks for design critique."
 
 # ── Profiles ─────────────────────────────────────────────────
 [profiles]
-website = ["core", "design", "taste-skill", "impeccable"]
-webapp = ["core", "build", "design", "superpowers", "ponytail", "taste-skill", "impeccable"]
+website = ["core", "design", "taste-skill"]
+webapp = ["core", "build", "design", "superpowers", "ponytail", "taste-skill"]
 app = ["core", "build", "design", "superpowers", "ponytail"]
 extension = ["core", "build", "superpowers", "ponytail"]
 api = ["core", "build", "superpowers", "ponytail"]
