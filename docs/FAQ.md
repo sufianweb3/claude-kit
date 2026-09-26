@@ -18,7 +18,7 @@ Open a Claude Code session on this repo and say what you want, for example "Add 
 
 ## 5. How do updates reach projects?
 
-`kit.py build` bumps the version of every plugin whose content changed. Once the change is merged into `main`, projects pick it up at their next session start: a web session installs the plugins fresh from the marketplace each time, and in the CLI you run `/plugin marketplace update sufian-kit`. Nothing changes inside a session that is already running.
+`kit.py build` bumps the version of every plugin whose content changed. Once the change is merged into `main`, projects pick it up at their next session start: a web session installs the plugins fresh from the marketplace each time, and in the CLI you run `/plugin marketplace update sufian-kit`. Nothing changes inside a session that is already running. Projects that pin a release tag (`"ref": "v1.0.0"`, see the [README](../README.md)) only change when you move `ref` to a newer tag.
 
 ## 6. How do audits work?
 
