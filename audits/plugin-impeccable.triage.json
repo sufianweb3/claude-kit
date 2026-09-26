@@ -1,0 +1,102 @@
+[
+  {
+    "hash": "sha256:3e487a888c499c301dc82d1243ec43ece3c8b775ef64633ab1751e77ac077617",
+    "rule_id": "AR2",
+    "file": ".claude/agents/impeccable-finish-reviewer.md",
+    "evidence": "L15: Anti-Refusal Statement: You have no browser. Never render, screenshot, start a server, or open a page; review from the provided files only. When an expected input other than a capture is missing, say so in one line at the to",
+    "reason": "Scope restriction for its reviewer agent (no browser, review provided files only); limits behaviour, not an anti-refusal instruction. Reviewed."
+  },
+  {
+    "hash": "sha256:07e62ba85384e522302bfb71526ac98f15d30b970b8aa0a99d4eb6180f20b1b8",
+    "rule_id": "MP3",
+    "file": ".claude/skills/impeccable/reference/colorize.md",
+    "evidence": "L23: Memory Manipulation: - light/dark or data-visualization requirements; - whether the task asks for more color or a new identity. If a new identity is required, use [new-work.md](new-work.md). Ask only when a binding brand ",
+    "reason": "Colour task checklist (light/dark, data-viz, new identity) with a link to new-work.md; no memory manipulation. Reviewed."
+  },
+  {
+    "hash": "sha256:a9012f6f985044bf8c8b091985604eeffd8627897e72cb6d135716bd063a8967",
+    "rule_id": "AR2",
+    "file": ".claude/skills/impeccable/reference/critique.md",
+    "evidence": "L243: Anti-Refusal Statement: - Every question must reference specific findings from the report. Never ask generic \"who is your audience?\" questions. - Keep it to 2-4 questions maximum. Respect the user's time. - Offer concrete op",
+    "reason": "Guidance to ask 2-4 specific questions tied to findings; about respecting user time, not bypassing refusals. Reviewed."
+  },
+  {
+    "hash": "sha256:5295074347d198e9c2d600e36bbefc60688893eb328435bd0cc5c1c9e6bf9513",
+    "rule_id": "P2",
+    "file": ".claude/skills/impeccable/reference/live.md",
+    "evidence": "L184: Hidden Instructions: Complete HTML replacement of the original element per variant, not a CSS-only patch. Colocate preview CSS as a `<style>` tag inside the wrapper. **Atomic default:** CSS + all variants + parameter mani",
+    "reason": "Describes colocating a visible style tag in live variant previews; no hidden characters or concealed instructions. Reviewed."
+  },
+  {
+    "hash": "sha256:6b364565f62ea6ce598188382e29c5c7c119d010ebd443a870030b8458f6ace9",
+    "rule_id": "P2",
+    "file": ".claude/skills/impeccable/reference/live.md",
+    "evidence": "L184: Hidden Instructions: Complete HTML replacement of the original element per variant, not a CSS-only patch. Colocate preview CSS as a `<style>` tag inside the wrapper. **Atomic default:** CSS + all variants + parameter mani",
+    "reason": "Describes colocating a visible style tag in live variant previews; no hidden characters or concealed instructions. Reviewed."
+  },
+  {
+    "hash": "sha256:45a18934964a493a94fc1dcb389a4d5fbc429a9796d7a027ef0a3253811e9ad3",
+    "rule_id": "AR2",
+    "file": ".claude/skills/impeccable/reference/new-work.md",
+    "evidence": "L138: Anti-Refusal Statement: between them rather than earning per-tweak screenshots. On a comp-led build, run `.claude/skills/impeccable/scripts/impeccable comp-diff --comp <approved comp> --build .impeccable/review/desktop.png -",
+    "reason": "Instruction to run its comp-diff command against screenshots in its own .impeccable/ folder; workflow step, not anti-refusal. Reviewed."
+  },
+  {
+    "hash": "sha256:bf992e377946b29e123b3db9c2effdf648b930c12a016dc8ec3e57600c43dee9",
+    "rule_id": "SC9",
+    "file": ".claude/skills/impeccable/scripts/impeccable",
+    "evidence": "L1: Concealed Executable Artifact: None",
+    "reason": "Launcher script. It runs a native impeccable engine binary that is NOT in the repo: downloaded on first use from the author's GitHub release pinned by VERSION (0.1.6) and checked against a same-origin sha256 sidecar. Binary itself is unscanned; accepted risk, see kit.toml."
+  },
+  {
+    "hash": "sha256:ea218271afc084ed717c4a649d1d0d3b92fcd77c197ed317c0d530bdbaa14085",
+    "rule_id": "SC9",
+    "file": ".claude/skills/impeccable/scripts/impeccable.cmd",
+    "evidence": "L1: Concealed Executable Artifact: None",
+    "reason": "Windows twin of the launcher: Launcher script. It runs a native impeccable engine binary that is NOT in the repo: downloaded on first use from the author's GitHub release pinned by VERSION (0.1.6) and checked against a same-origin sha256 sidecar. Binary itself is unscanned; accepted risk, see kit.toml."
+  },
+  {
+    "hash": "sha256:32bc42424216737a5e66f39b2cbb9ef44adc5dfc3561c54091ac446626764a60",
+    "rule_id": "SC9",
+    "file": ".claude/skills/impeccable/scripts/live-browser-dom.js",
+    "evidence": "L1: Concealed Executable Artifact: None",
+    "reason": "Browser-side helper injected into the page under live review; only contacts localhost (grep of URLs: localhost, w3.org SVG namespace). Reviewed."
+  },
+  {
+    "hash": "sha256:4fe8dc8a315ac5f9624202b2b99da8df4c882e1a3c0f4160bafa2376b5bf49b7",
+    "rule_id": "SC9",
+    "file": ".claude/skills/impeccable/scripts/live-browser-ignores.js",
+    "evidence": "L1: Concealed Executable Artifact: None",
+    "reason": "Browser-side ignore-list helper for live mode; no network or process calls found. Reviewed."
+  },
+  {
+    "hash": "sha256:32a260cf23d559ac7bfaaeadc0e01671bd178186ce4b86e1e7c402d857ff33ed",
+    "rule_id": "SC9",
+    "file": ".claude/skills/impeccable/scripts/live-browser-session.js",
+    "evidence": "L1: Concealed Executable Artifact: None",
+    "reason": "Browser-side session helper for live mode talking to its localhost server only. Reviewed."
+  },
+  {
+    "hash": "sha256:85f3d4dd28a5743073001dd962e4afed891ff074f5002db49adcd2ed28387ac0",
+    "rule_id": "SC9",
+    "file": ".claude/skills/impeccable/scripts/live-browser.js",
+    "evidence": "L1: Concealed Executable Artifact: None",
+    "reason": "Bundled 547KB browser script for live mode; URL grep shows localhost only. Bundled, so reviewed by pattern not line by line. Accepted with the binary note."
+  },
+  {
+    "hash": "sha256:012ed5215a2385db85160c5063b5a21c186ebf19e9a37369d4f77bb91e82124f",
+    "rule_id": "SC9",
+    "file": ".claude/skills/impeccable/scripts/modern-screenshot.umd.js",
+    "evidence": "L1: Concealed Executable Artifact: None",
+    "reason": "Vendored minified modern-screenshot UMD library (DOM to image) used for page captures; well-known open source bundle. Reviewed header."
+  },
+  {
+    "hash": "rule:AR2:.claude/skills/impeccable/reference/degraded/finish-reviewer.md",
+    "rule_id": "AR2",
+    "file": ".claude/skills/impeccable/reference/degraded/finish-reviewer.md",
+    "as_rule": true,
+    "message": "*Anti-Refusal Statement*",
+    "evidence": "1x, first L10: You have no browser. Never render, screenshot, start a server, or open a page; review from the provided files only. When an expected input other than a capture ",
+    "reason": "Same scope restriction text for the degraded reviewer mode (no browser, files only). Reviewed."
+  }
+]

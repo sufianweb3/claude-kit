@@ -1,0 +1,19 @@
+{
+  "kind": "mcp",
+  "id": "playwright",
+  "target": "npm:@playwright/mcp@0.0.82",
+  "scope": "npm package @playwright/mcp@0.0.82 minus markdown docs; transitive dependencies not scanned",
+  "scanner": "skillspector 2.12.0",
+  "mode": "static (--no-llm) + Claude review of triage",
+  "raw_score": 15,
+  "raw_recommendation": "CAUTION",
+  "active_by_severity": {
+    "MEDIUM": 1,
+    "LOW": 3
+  },
+  "active_high_critical": 0,
+  "suppressed": 0,
+  "completeness": "partial",
+  "verdict": "pass",
+  "date": "2026-09-25"
+}

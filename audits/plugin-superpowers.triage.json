@@ -1,0 +1,152 @@
+[
+  {
+    "hash": "sha256:c13bc49e5d9da1fa0728c1685acac9e8d699e7a35103e2de3b5a19c16b2f3b83",
+    "rule_id": "P2",
+    "file": "skills/brainstorming/scripts/server.cjs",
+    "evidence": "L174: Hidden Instructions: .brand-logo { display: block; height: 1em; width: auto; max-width: 180px; filter: invert(1); } </style> </head> <body><!-- BRANDING --><h1>Brainstorm Companion</h1> <p>Waiting for the agent to push a ",
+    "reason": "HTML comment placeholder in the brainstorm companion page template. Server binds 127.0.0.1 with a session token and origin check; only egress is a logo image. Reviewed."
+  },
+  {
+    "hash": "sha256:d6149dff58319b9ca89ad3139b27ba7db942abd80e6232f6ebe388b562b81a39",
+    "rule_id": "TM1",
+    "file": "skills/brainstorming/scripts/stop-server.sh",
+    "evidence": "L22: Tool Parameter Abuse: mark_stopped() { local reason=\"$1\" rm -f \"${STATE_DIR}/server-info\" printf '{\"reason\":\"%s\",\"timestamp\":%s}\\n' \"$reason\" \"$(date +%s)\" > \"${STATE_DIR}/server-stopped\" }",
+    "reason": "Deletes its own state file in its own STATE_DIR when stopping the local brainstorm server; no user paths touched. Reviewed."
+  },
+  {
+    "hash": "sha256:1f6ff04e3cdabda980b17cd87b3840764df90a804bf97cd41e32460d15cba66e",
+    "rule_id": "AR2",
+    "file": "skills/diagnosing-superpowers/prompts/request-conflicts.md",
+    "evidence": "L19: Anti-Refusal Statement: rule, and what happened afterwards; - an instruction the assistant asked to clarify and the answer, when the answer changed scope. 3. Do not judge whether your human partner was right. Report the conf",
+    "reason": "Diagnostic prompt asking to report conflicts neutrally without judging the user; not an anti-refusal instruction. Reviewed."
+  },
+  {
+    "hash": "sha256:a0d2caa9b79eb1b382154d98ed15a14ec9d88008918ec3fe73f2277a970d7d31",
+    "rule_id": "TM1",
+    "file": "skills/executing-plans/SKILL.md",
+    "evidence": "L140: Tool Parameter Abuse: another plan's progress: leave it and start your own, fresh. - Create the ledger with its identity as the first line: `# SDD ledger \u2014 plan: <plan file path>`. - `git clean -fdx` will destroy the works",
+    "reason": "Mentions git clean -fdx as a caution about ledger files; executing-plans is overridden by the kit planning skill anyway. Reviewed."
+  },
+  {
+    "hash": "sha256:f301f10f1f1d2a53eccf223359b4f0fb588995fd33cffc280f27b22d8b83053d",
+    "rule_id": "TM1",
+    "file": "skills/finishing-a-development-branch/SKILL.md",
+    "evidence": "L116: Tool Parameter Abuse: ### Option 2: Push and Create PR ```bash git push -u origin <feature-branch> # From a detached HEAD, name the new branch on the remote: # git push origin HEAD:refs/heads/<new-branch> ```",
+    "reason": "Documented git push / PR commands for finishing a branch, run only when the user chooses that option. Reviewed."
+  },
+  {
+    "hash": "sha256:2338114e863a0fb2f0c37ccbf4b63f22a620d480629716a64e31a0dfa177db3f",
+    "rule_id": "PE3",
+    "file": "skills/systematic-debugging/SKILL.md",
+    "evidence": "L98: Credential Access: env | grep IDENTITY || echo \"IDENTITY not in environment\" # Layer 3: Signing script echo \"=== Keychain state: ===\" security list-keychains security find-identity -v",
+    "reason": "Example diagnostic of macOS code-signing keychain state in a debugging walkthrough; lists identities, reads no secrets. Skill is overridden by kit debug."
+  },
+  {
+    "hash": "sha256:2719f664c3166451c410a076f19aa9c53482091354de21ffef0f49cb3553a760",
+    "rule_id": "PE3",
+    "file": "skills/systematic-debugging/SKILL.md",
+    "evidence": "L99: Credential Access: # Layer 3: Signing script echo \"=== Keychain state: ===\" security list-keychains security find-identity -v # Layer 4: Actual signing",
+    "reason": "Example diagnostic of macOS code-signing keychain state in a debugging walkthrough; lists identities, reads no secrets. Skill is overridden by kit debug."
+  },
+  {
+    "hash": "sha256:82bae5c0df4ea301ea7572c73993051d5a1a487dd374d13e839a55370d8ae274",
+    "rule_id": "E4",
+    "file": "skills/systematic-debugging/defense-in-depth.md",
+    "evidence": "L73: Context Leakage: ``` ### Layer 4: Debug Instrumentation **Purpose:** Capture context for forensics ```typescript async function gitInit(directory: string) {",
+    "reason": "Teaching example of debug instrumentation logging in a TypeScript snippet; documentation, not executed. Reviewed."
+  },
+  {
+    "hash": "sha256:db960c05ddd553cc51c27248a09ec388ca444beacb4c58949308f5884bcff453",
+    "rule_id": "RA1",
+    "file": "skills/writing-skills/anthropic-best-practices.md",
+    "evidence": "L5: Self-Modification: > Learn how to write effective Skills that agents can discover and use successfully. Good Skills are concise, well-structured, and tested with real usage. This guide provides practical authoring decis",
+    "reason": "Copy of skill-authoring best practices documentation; describes how to write skills, no self-modifying behaviour. Reviewed."
+  },
+  {
+    "hash": "sha256:0a8c43987d31dd0c6a0abd0399961f9ca2783d6e3118955ef492c1361bcf1cda",
+    "rule_id": "AS1",
+    "file": "skills/using-superpowers/references/codex-tools.md",
+    "evidence": "L71: Agent Config Directory Access: silently resets to that model's default, not to yours. Ask your human partner to add a machine-level backstop to `~/.codex/config.toml` so any spawn that slips through still routes to a deliberate tie",
+    "reason": "Reference note for Codex users about ~/.codex/config.toml; never read or written under Claude Code. Reviewed."
+  },
+  {
+    "hash": "sha256:3888ebc6aa44e3acd53993367a240e0f7d3ea5dae6ca6cbc55f6874d001c6e95",
+    "rule_id": "RA1",
+    "file": "skills/writing-skills/SKILL.md",
+    "evidence": "L384: Self-Modification: This applies to NEW skills AND EDITS to existing skills. Write skill before testing? Delete it. Start over. Edit skill without testing? Same violation. **No exceptions:**",
+    "reason": "Skill-authoring methodology (TDD for skills, closing loopholes); describes editing skill files the user asked to write, not self-modification."
+  },
+  {
+    "hash": "sha256:32f98ce177d5ad337b5348a7364c8b857ca591eb0d22dc159970bda7a51c23e5",
+    "rule_id": "RA1",
+    "file": "skills/writing-skills/SKILL.md",
+    "evidence": "L569: Self-Modification: This applies to NEW skills AND EDITS to existing skills. Write skill before testing? Delete it. Start over. Edit skill without testing? Same violation. **No exceptions:**",
+    "reason": "Skill-authoring methodology (TDD for skills, closing loopholes); describes editing skill files the user asked to write, not self-modification."
+  },
+  {
+    "hash": "sha256:0903c088c948bc39a7ffb0a2a7200b9a8009bf25525f3541a9ae10c8635c3644",
+    "rule_id": "AS1",
+    "file": "skills/writing-skills/examples/CLAUDE_MD_TESTING.md",
+    "evidence": "L95: Agent Config Directory Access: is at `~/.claude/skills/`. Browse categories: `ls ~/.claude/skills/` Search: `grep -r \"keyword\" ~/.claude/skills/ --include=\"SKILL.md\"` Instructions: `skills/using-skills` </available_skills>",
+    "reason": "Example CLAUDE.md variants for testing skill discovery (ls ~/.claude/skills); read-only listing in an example file. Reviewed."
+  },
+  {
+    "hash": "sha256:f39a67c647d2e9dcf61364cf2b7e62e452304ef02d020839d036db78a2d8c299",
+    "rule_id": "AS1",
+    "file": "skills/writing-skills/examples/CLAUDE_MD_TESTING.md",
+    "evidence": "L95: Agent Config Directory Access: is at `~/.claude/skills/`. Browse categories: `ls ~/.claude/skills/` Search: `grep -r \"keyword\" ~/.claude/skills/ --include=\"SKILL.md\"` Instructions: `skills/using-skills` </available_skills>",
+    "reason": "Example CLAUDE.md variants for testing skill discovery (ls ~/.claude/skills); read-only listing in an example file. Reviewed."
+  },
+  {
+    "hash": "sha256:10777a21e1cee2bf7f05059d77b298909145a7bde4f4bc7756f7683f36407606",
+    "rule_id": "RA1",
+    "file": "skills/writing-skills/testing-skills-with-subagents.md",
+    "evidence": "L36: Self-Modification: This applies to NEW skills AND EDITS to existing skills. Write skill before testing? Delete it. Start over. Edit skill without testing? Same violation. **No exceptions:**",
+    "reason": "Methodology table for pressure-testing skills with subagents; documentation, no self-modification. Reviewed."
+  },
+  {
+    "hash": "rule:AS1:skills/using-superpowers/references/codex-tools.md",
+    "rule_id": "AS1",
+    "file": "skills/using-superpowers/references/codex-tools.md",
+    "as_rule": true,
+    "message": "*Agent Config Directory Access*",
+    "evidence": "1 identical findings",
+    "reason": "Repeat of the reviewed finding in this same file: Reference note for Codex users about ~/.codex/config.toml; never read or written under Claude Code. Reviewed."
+  },
+  {
+    "hash": "rule:RA1:skills/writing-skills/SKILL.md",
+    "rule_id": "RA1",
+    "file": "skills/writing-skills/SKILL.md",
+    "as_rule": true,
+    "message": "*Self-Modification*",
+    "evidence": "2 identical findings",
+    "reason": "Repeat of the reviewed finding in this same file: Skill-authoring methodology (TDD for skills, closing loopholes); describes editing skill files the user asked to write, not self-modification."
+  },
+  {
+    "hash": "rule:RA1:skills/writing-skills/testing-skills-with-subagents.md",
+    "rule_id": "RA1",
+    "file": "skills/writing-skills/testing-skills-with-subagents.md",
+    "as_rule": true,
+    "message": "*Self-Modification*",
+    "evidence": "3 identical findings",
+    "reason": "Repeat of the reviewed finding in this same file: Methodology table for pressure-testing skills with subagents; documentation, no self-modification. Reviewed."
+  },
+  {
+    "hash": "rule:AS1:skills/writing-skills/examples/CLAUDE_MD_TESTING.md",
+    "rule_id": "AS1",
+    "file": "skills/writing-skills/examples/CLAUDE_MD_TESTING.md",
+    "as_rule": true,
+    "message": "*Agent Config Directory Access*",
+    "evidence": "1 identical findings",
+    "reason": "Repeat of the reviewed finding in this same file: Example CLAUDE.md variants for testing skill discovery (ls ~/.claude/skills); read-only listing in an example file. Reviewed."
+  },
+  {
+    "hash": "rule:TM1:skills/subagent-driven-development/SKILL.md",
+    "rule_id": "TM1",
+    "file": "skills/subagent-driven-development/SKILL.md",
+    "as_rule": true,
+    "message": "*Tool Parameter Abuse*",
+    "evidence": "1 identical findings",
+    "reason": "Warns that git clean -fdx would destroy the git-ignored scratch ledger and how to recover; a caution, not a command to run. Reviewed."
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "kind": "skill",
+  "id": "ui-standards",
+  "target": "sha256:73621a12a269c1aeb1c98f70",
+  "scope": "whole skill folder",
+  "scanner": "skillspector 2.12.0",
+  "mode": "static (--no-llm) + Claude review of triage",
+  "raw_score": 24,
+  "raw_recommendation": "CAUTION",
+  "active_by_severity": {
+    "MEDIUM": 11
+  },
+  "active_high_critical": 0,
+  "suppressed": 0,
+  "completeness": "partial",
+  "verdict": "pass",
+  "date": "2026-09-25"
+}

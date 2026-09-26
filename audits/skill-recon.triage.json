@@ -1,0 +1,20 @@
+[
+  {
+    "hash": "sha256:e05e9efe7a69ac0236ff9db02d550d6e8e9fb69b53b841c8fb29daef17af21bd",
+    "rule_id": "P1",
+    "file": "SKILL.md",
+    "evidence": [
+      "L12: Instruction Override: 2. Schema, config and env come from the source of truth (migration history, live schema, actual config files), never from memory. A hallucinated schema is how a"
+    ],
+    "reason": "Kit-authored recon rule. It quotes injection phrases only as examples of repo text to REPORT as danger zones, instructing the agent never to act on them."
+  },
+  {
+    "hash": "sha256:0f871b8b05c33c72525f09072b364a2590dcce0a29166cec33ea3d8ebc116cc7",
+    "rule_id": "YR4",
+    "file": "SKILL.md",
+    "evidence": [
+      "L12: YARA rule 'agent_skill_prompt_injection_hidden_instructions': Prompt injection or hidden instructions embedded in AI agent skill text [agent_skills]: 3. Deliver a **Context Report** (max 150 lines, in chat): stack + versions · entry points · modules · schema · conventions (naming, errors, tests, with ONE gold"
+    ],
+    "reason": "Same deliberate quotation of injection phrases inside a detection instruction; the skill tells the agent to treat such text as data and report it."
+  }
+]

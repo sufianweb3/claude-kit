@@ -1,0 +1,11 @@
+[
+  {
+    "hash": "sha256:b0631ed16efb76a13328aa8ab872391cde7a6332c40aba8727a63eda4f4a1c01",
+    "rule_id": "AE1",
+    "file": "SKILL.md",
+    "evidence": "L37: Incomplete referenced artifact analysis: eds justification or it's a finding. Per-element budgets live in [STANDARDS.md](STANDARDS.md).",
+    "reason": "STANDARDS.md is vendored alongside SKILL.md (verified present); finding is a scanner completeness note, not a threat.",
+    "as_rule": true,
+    "message": "*STANDARDS.md*"
+  }
+]

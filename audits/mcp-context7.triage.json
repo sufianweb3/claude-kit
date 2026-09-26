@@ -1,0 +1,30 @@
+[
+  {
+    "hash": "sha256:f126a1ab707947baa88a5b39e89ce7ca6cfeddd44e9f7ef201225dcab1350ce3",
+    "rule_id": "PE3",
+    "file": "dist/lib/constants.js",
+    "evidence": "L18: Credential Access: // identity. export const OAUTH_AUTH_SERVER_URL = (process.env.OAUTH_AUTH_SERVER_URL || DEFAULT_OAUTH_AUTH_SERVER_URL).replace(/\\/+$/, \"\"); export const OAUTH_JWKS_URL = process.env.OAUTH_JWKS_URL || ",
+    "reason": "Reads optional OAuth/JWKS endpoint overrides from env for its own auth config; no secret is read or sent elsewhere. Reviewed dist/lib/constants.js 2026-09-25."
+  },
+  {
+    "hash": "sha256:f0f0dd1019f11223b72c150abbd9e2b9d249ab366c6e506f885204c1f4bc6a15",
+    "rule_id": "TM1",
+    "file": "package.json",
+    "evidence": "L74: Tool Parameter Abuse: \"dev\": \"tsc --watch\", \"start\": \"node dist/index.js --transport http\", \"build:mcpb\": \"esbuild src/index.ts --bundle --platform=node --target=node20 --format=esm --outfile=mcpb/stage/server/dist/index.m",
+    "reason": "npm developer scripts (build, dev, start) in package.json; npx never runs them and the package has no pre/postinstall hooks. Reviewed 2026-09-25."
+  },
+  {
+    "hash": "sha256:e8a2474fbac4e147028afe9cf8fde2d17118b3e6ad73f0ee78a7c31bc6986be9",
+    "rule_id": "TM1",
+    "file": "package.json",
+    "evidence": "L74: Tool Parameter Abuse: \"dev\": \"tsc --watch\", \"start\": \"node dist/index.js --transport http\", \"build:mcpb\": \"esbuild src/index.ts --bundle --platform=node --target=node20 --format=esm --outfile=mcpb/stage/server/dist/index.m",
+    "reason": "npm developer scripts (build, dev, start) in package.json; npx never runs them and the package has no pre/postinstall hooks. Reviewed 2026-09-25."
+  },
+  {
+    "hash": "sha256:e2ecf265751c3b419aa680ceabfcd9518990f66284f365d889766cef1f6fe21f",
+    "rule_id": "TM2",
+    "file": "package.json",
+    "evidence": "L74: Chaining Abuse: \"dev\": \"tsc --watch\", \"start\": \"node dist/index.js --transport http\", \"build:mcpb\": \"esbuild src/index.ts --bundle --platform=node --target=node20 --format=esm --outfile=mcpb/stage/server/dist/index.m",
+    "reason": "Same developer build script chain in package.json; not executed on install or by npx. No lifecycle hooks present. Reviewed 2026-09-25."
+  }
+]

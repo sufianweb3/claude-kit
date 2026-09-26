@@ -1,0 +1,20 @@
+{
+  "kind": "plugin",
+  "id": "superpowers",
+  "target": "obra/superpowers@5bf4e78011075bcfc0dc295f0724994cd123ee71",
+  "scope": "installable surface: .claude-plugin, hooks, scripts, skills",
+  "scanner": "skillspector 2.12.0",
+  "mode": "static (--no-llm) + Claude review of triage",
+  "raw_score": 80,
+  "raw_recommendation": "DO_NOT_INSTALL",
+  "active_by_severity": {
+    "MEDIUM": 27,
+    "LOW": 1
+  },
+  "active_high_critical": 0,
+  "suppressed": 23,
+  "completeness": "partial",
+  "verdict": "pass",
+  "open_findings": [],
+  "date": "2026-09-25"
+}

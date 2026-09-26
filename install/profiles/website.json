@@ -1,0 +1,16 @@
+{
+  "extraKnownMarketplaces": {
+    "sufian-kit": {
+      "source": {
+        "source": "github",
+        "repo": "sufianweb3/claude-kit"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "core@sufian-kit": true,
+    "design@sufian-kit": true,
+    "taste-skill@sufian-kit": true,
+    "impeccable@sufian-kit": true
+  }
+}

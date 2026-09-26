@@ -1,0 +1,11 @@
+[
+  {
+    "hash": "sha256:6a788d145967f5a4d3fe58375ddb292c68cd0c9d76ea501ce312df2b5dd393f3",
+    "rule_id": "AR2",
+    "file": "SKILL.md",
+    "evidence": [
+      "L65: Anti-Refusal Statement: - **In a project with a dev server** — an isolated route or page (`/prototypes/<slug>`, or the framework's equivalent), one file per variant plus a small harnes"
+    ],
+    "reason": "Describes where prototype variants live in a dev server route; no anti-refusal content. Scanner keyword false positive."
+  }
+]

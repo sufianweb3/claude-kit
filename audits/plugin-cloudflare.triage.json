@@ -1,0 +1,185 @@
+[
+  {
+    "hash": "sha256:032aa42eb0af2a41a275b840fcf395ae772a31611f8023bd6d5546b1c75fe090",
+    "rule_id": "TM1",
+    "file": "skills/cloudflare/references/api-shield/api.md",
+    "evidence": "L12: Tool Parameter Abuse: GET /operations/{op_id} # Get single POST /operations/item # Create: {endpoint,host,method} POST /operations # Bulk: {operations:[{endpoint,host,method}]} DELETE /operations/{op_id} # Delete DELETE /o",
+    "reason": "Cloudflare REST API reference listing (GET/POST/DELETE endpoints) in skill reference docs; documentation for the user's own account, nothing auto-executed. Reviewed."
+  },
+  {
+    "hash": "sha256:ecb6fa707050081d67e89607e8018e7d70d6ce28212013f1720c2c3b2d52b16a",
+    "rule_id": "TM1",
+    "file": "skills/cloudflare/references/api-shield/api.md",
+    "evidence": "L13: Tool Parameter Abuse: POST /operations/item # Create: {endpoint,host,method} POST /operations # Bulk: {operations:[{endpoint,host,method}]} DELETE /operations/{op_id} # Delete DELETE /operations # Bulk delete: {operation_i",
+    "reason": "Cloudflare REST API reference listing (GET/POST/DELETE endpoints) in skill reference docs; documentation for the user's own account, nothing auto-executed. Reviewed."
+  },
+  {
+    "hash": "sha256:16ccf9e9b2f0e68783decb2b6b4c389aa1fb700dbed87df582ab068e4c580243",
+    "rule_id": "TM1",
+    "file": "skills/cloudflare/references/artifacts/api.md",
+    "evidence": "L86: Tool Parameter Abuse: | `POST /repos` | Create a repo | | `GET /repos` | List repos | | `GET /repos/:name` | Read repo metadata and remote | | `DELETE /repos/:name` | Delete a repo | | `POST /repos/:name/fork` | Fork a rep",
+    "reason": "Cloudflare REST API reference listing (GET/POST/DELETE endpoints) in skill reference docs; documentation for the user's own account, nothing auto-executed. Reviewed."
+  },
+  {
+    "hash": "sha256:7eaab89decfe88164c384aa33d86d87dd6a9a2c94ba7f82b61db3048f75833b8",
+    "rule_id": "TM1",
+    "file": "skills/cloudflare/references/artifacts/api.md",
+    "evidence": "L108: Tool Parameter Abuse: |-------|---------| | `GET /repos/:name/tokens` | List repo tokens | | `POST /tokens` | Create a token for a repo | | `DELETE /tokens/:id` | Revoke a token by ID | Current docs show list-token filteri",
+    "reason": "Cloudflare REST API reference listing (GET/POST/DELETE endpoints) in skill reference docs; documentation for the user's own account, nothing auto-executed. Reviewed."
+  },
+  {
+    "hash": "sha256:3a6703cfe01e2dda6e118dd73392538c83b033d1a71ed7544cd19692b6712939",
+    "rule_id": "PE3",
+    "file": "skills/cloudflare/references/artifacts/configuration.md",
+    "evidence": "L74: Credential Access: ## Git Consumers Artifacts is designed to work with standard git-over-HTTPS clients once you have a repo `remote` and an access token. Prefer header-based auth for local tooling so the full token stay",
+    "reason": "Reference text advising tokens live in gitignored .env or secret managers, or explaining bound secrets; guidance, no credential harvesting. Reviewed."
+  },
+  {
+    "hash": "sha256:c84b213dc6ddad6487cb6ddf6d2b79a938be4cea43f9ebe44776bdc5fb9dbcde",
+    "rule_id": "TM1",
+    "file": "skills/cloudflare/references/network-interconnect/api.md",
+    "evidence": "L36: Tool Parameter Abuse: GET /accounts/{account_id}/cni/interconnects/{icon} GET /accounts/{account_id}/cni/interconnects/{icon}/status GET /accounts/{account_id}/cni/interconnects/{icon}/loa # Returns PDF DELETE /accounts/{a",
+    "reason": "Cloudflare REST API reference listing (GET/POST/DELETE endpoints) in skill reference docs; documentation for the user's own account, nothing auto-executed. Reviewed."
+  },
+  {
+    "hash": "sha256:98d44ab744878f09c3a47d489474b1c9a7e436bc2357981eba6634423fde2989",
+    "rule_id": "TM1",
+    "file": "skills/cloudflare/references/network-interconnect/api.md",
+    "evidence": "L54: Tool Parameter Abuse: POST /accounts/{account_id}/cni/cnis GET /accounts/{account_id}/cni/cnis/{cni} PUT /accounts/{account_id}/cni/cnis/{cni} DELETE /accounts/{account_id}/cni/cnis/{cni} ``` Body: `account`, `cust_ip`, `c",
+    "reason": "Cloudflare REST API reference listing (GET/POST/DELETE endpoints) in skill reference docs; documentation for the user's own account, nothing auto-executed. Reviewed."
+  },
+  {
+    "hash": "sha256:2f49c40272ce4a47535449caedb0f0374392edec725b1867b8387d608dea5ce7",
+    "rule_id": "TM1",
+    "file": "skills/cloudflare/references/realtimekit/api.md",
+    "evidence": "L146: Tool Parameter Abuse: GET /meetings/{meeting_id}/participants/{participant_id} # Get details POST /meetings/{meeting_id}/participants # Add: {\"name\": \"...\", \"preset_name\": \"...\", \"custom_participant_id\": \"...\"} PATCH /meet",
+    "reason": "Cloudflare REST API reference listing (GET/POST/DELETE endpoints) in skill reference docs; documentation for the user's own account, nothing auto-executed. Reviewed."
+  },
+  {
+    "hash": "sha256:ffca2a4cfb9b3e3c150c559366f7baaf72db09b6b29cb7cb54df6250ae226ec4",
+    "rule_id": "TM1",
+    "file": "skills/cloudflare/references/realtimekit/api.md",
+    "evidence": "L195: Tool Parameter Abuse: GET /webhooks # List all POST /webhooks # Create: {\"url\": \"https://...\", \"events\": [\"session.started\", \"session.ended\"]} PATCH /webhooks/{webhook_id} # Update DELETE /webhooks/{webhook_id} # Delete ``",
+    "reason": "Cloudflare REST API reference listing (GET/POST/DELETE endpoints) in skill reference docs; documentation for the user's own account, nothing auto-executed. Reviewed."
+  },
+  {
+    "hash": "sha256:6244f2846ce29064fdce29e3e0f0cf95811665c08ec498b3a331c253871c4081",
+    "rule_id": "PE3",
+    "file": "skills/cloudflare/references/secrets-store/api.md",
+    "evidence": "L7: Credential Access: | Task | Documentation | |------|---------------| | Read a bound account secret asynchronously in a Worker | [Workers integration: access the secret](https://developers.cloudflare.com/secrets-store/in",
+    "reason": "Reference text advising tokens live in gitignored .env or secret managers, or explaining bound secrets; guidance, no credential harvesting. Reviewed."
+  },
+  {
+    "hash": "sha256:6632f7458d342ee9acfa418e3079670b4dc6da90c65d8ee5de723a7285861416",
+    "rule_id": "TM1",
+    "file": "skills/cloudflare/references/snippets/api.md",
+    "evidence": "L146: Tool Parameter Abuse: ### Delete Snippet ```bash DELETE /zones/{zone_id}/snippets/{snippet_name} ``` ### List Snippet Rules",
+    "reason": "Cloudflare REST API reference listing (GET/POST/DELETE endpoints) in skill reference docs; documentation for the user's own account, nothing auto-executed. Reviewed."
+  },
+  {
+    "hash": "sha256:c7d81a3a5362e8d7eb2471044f635804f9cd1090e1a7be7611893bf51996d0df",
+    "rule_id": "TM1",
+    "file": "skills/cloudflare/references/spectrum/api.md",
+    "evidence": "L8: Tool Parameter Abuse: POST /zones/{zone_id}/spectrum/apps # Create app GET /zones/{zone_id}/spectrum/apps/{app_id} # Get app PUT /zones/{zone_id}/spectrum/apps/{app_id} # Update app DELETE /zones/{zone_id}/spectrum/apps/{a",
+    "reason": "Cloudflare REST API reference listing (GET/POST/DELETE endpoints) in skill reference docs; documentation for the user's own account, nothing auto-executed. Reviewed."
+  },
+  {
+    "hash": "sha256:3d4149cc9f5abd1a07ac14badb0d0cdfcd1f7a3ef2aba26d69d299816e6b8d81",
+    "rule_id": "TM1",
+    "file": "skills/cloudflare/references/turn/api.md",
+    "evidence": "L57: Tool Parameter Abuse: ### Delete TURN Key ``` DELETE /accounts/{account_id}/calls/turn_keys/{key_id} ``` ## Generate Temporary Credentials",
+    "reason": "Cloudflare REST API reference listing (GET/POST/DELETE endpoints) in skill reference docs; documentation for the user's own account, nothing auto-executed. Reviewed."
+  },
+  {
+    "hash": "sha256:e5ac17847c7bab3dcc6d320155ef9704dd7f756f28d64936bbfa7d407cc1ea1a",
+    "rule_id": "P2",
+    "file": "skills/cloudflare/references/web-analytics/patterns.md",
+    "evidence": "L10: Hidden Instructions: ### LCP Fixes ```html <!-- Priority hints --> <img src=\"hero.jpg\" loading=\"eager\" fetchpriority=\"high\" /> <link rel=\"preload\" as=\"image\" href=\"/hero.jpg\" fetchpriority=\"high\" /> ```",
+    "reason": "Visible HTML comment in an LCP performance example (priority hints); no hidden characters. Reviewed."
+  },
+  {
+    "hash": "sha256:3e24a39834e8de0738fdd6379190fdc0970ccb1293772cd9ca1837fcbb11d872",
+    "rule_id": "E4",
+    "file": "skills/cloudflare/references/workers-for-platforms/api.md",
+    "evidence": "L93: Context Leakage: **3-step process:** Create session \u2192 Upload files \u2192 Deploy Worker ### 1. Create Upload Session ```bash curl -X POST \".../scripts/$SCRIPT_NAME/assets-upload-session\" \\ -H \"Authorization: Bearer $API_TO",
+    "reason": "Workers for Platforms upload-session docs (JWT validity, 3-step upload); API documentation, no context leakage. Reviewed."
+  },
+  {
+    "hash": "sha256:036f29dee8c13962a1dfc27e98512fe43942f04d81ba2387f2a1c6581c0b1dd4",
+    "rule_id": "E4",
+    "file": "skills/cloudflare/references/workers-for-platforms/gotchas.md",
+    "evidence": "L110: Context Leakage: | Limit | Value | Notes | |-------|-------|-------| | Upload session JWT validity | 1 hour | Must complete upload within this time | | Completion token validity | 1 hour | Must deploy within this time",
+    "reason": "Workers for Platforms upload-session docs (JWT validity, 3-step upload); API documentation, no context leakage. Reviewed."
+  },
+  {
+    "hash": "sha256:c9161c922f8d950cbb4a860699938c402fdfaad3cb4728333cf8643d774a2545",
+    "rule_id": "PE3",
+    "file": "skills/cloudflare/references/workers-playground/gotchas.md",
+    "evidence": "L10: Credential Access: | Safari broken | Preview fails | Use Chrome/Firefox/Edge | | TypeScript unsupported | TS syntax errors | Write plain JS or use JSDoc | | No bindings | `env` always `{}` | Mock data or use external AP",
+    "reason": "Reference text advising tokens live in gitignored .env or secret managers, or explaining bound secrets; guidance, no credential harvesting. Reviewed."
+  },
+  {
+    "hash": "sha256:34747d6ea4391568a177d631a8c357539b440598d4b1c3c9ef72f89da8ae05c9",
+    "rule_id": "SC2",
+    "file": "skills/turnstile-spin/SKILL.md",
+    "evidence": "L259: External Script Fetching: if ! printf '%s' \"$secret\" | python3 -I -c 'import sys,urllib.parse; print(urllib.parse.urlencode({\"secret\":sys.stdin.read(),\"response\":\"XXXX.DUMMY.TOKEN.XXXX\"}),end=\"\")' | curl --disable -sS \"https:/",
+    "reason": "turnstile-spin scripts call only api.cloudflare.com and challenges.cloudflare.com with the user's own token passed via curl --config stdin (not argv). Reviewed endpoints."
+  },
+  {
+    "hash": "sha256:13acfccb09f27925871ce4f0ba605bf64ab09c197e603452ebb0c2d70ed8d072",
+    "rule_id": "SC2",
+    "file": "skills/turnstile-spin/scripts/auth-probe.sh",
+    "evidence": "L179: External Script Fetching: if ! probe_response=\"$( printf 'header = \"Authorization: Bearer %s\"\\n' \"$token\" | curl --disable --config - --silent --show-error --write-out $'\\n%{http_code}' -X POST \\ \"https://api.cloudflare.com/cl",
+    "reason": "turnstile-spin scripts call only api.cloudflare.com and challenges.cloudflare.com with the user's own token passed via curl --config stdin (not argv). Reviewed endpoints."
+  },
+  {
+    "hash": "sha256:9dc131b8cd9aed8ddc1c7ce1583381997f86aadd2652ce2fed99f542be9e130e",
+    "rule_id": "SC2",
+    "file": "skills/turnstile-spin/scripts/widget-create.sh",
+    "evidence": "L66: External Script Fetching: if ! API_RESPONSE=\"$( printf 'header = \"Authorization: Bearer %s\"\\n' \"$API_TOKEN\" | curl --disable --config - --silent --show-error --write-out $'\\n%{http_code}' -X POST \\ \"https://api.cloudflare.com/",
+    "reason": "turnstile-spin scripts call only api.cloudflare.com and challenges.cloudflare.com with the user's own token passed via curl --config stdin (not argv). Reviewed endpoints."
+  },
+  {
+    "hash": "rule:PE3:skills/cloudflare/references/argo-smart-routing/configuration.md",
+    "rule_id": "PE3",
+    "file": "skills/cloudflare/references/argo-smart-routing/configuration.md",
+    "as_rule": true,
+    "message": "*Credential Access*",
+    "evidence": "1x, first L114: **Security:** Never commit tokens. Use `.env` files (gitignored) or secret managers. ### .env File Pattern ```bash # .env (add to .gitignore)",
+    "reason": "Reference text advising tokens live in gitignored .env or secret managers, or explaining bound secrets; guidance, no credential harvesting. Reviewed."
+  },
+  {
+    "hash": "rule:PE3:skills/cloudflare/references/r2-sql/configuration.md",
+    "rule_id": "PE3",
+    "file": "skills/cloudflare/references/r2-sql/configuration.md",
+    "as_rule": true,
+    "message": "*Credential Access*",
+    "evidence": "1x, first L27: **Security:** Never commit tokens. Use `.env` files (gitignored) or secret managers. ### .env File Pattern ```bash # .env (add to .gitignore)",
+    "reason": "Reference text advising tokens live in gitignored .env or secret managers, or explaining bound secrets; guidance, no credential harvesting. Reviewed."
+  },
+  {
+    "hash": "rule:PE3:skills/cloudflare/references/turn/configuration.md",
+    "rule_id": "PE3",
+    "file": "skills/cloudflare/references/turn/configuration.md",
+    "as_rule": true,
+    "message": "*Credential Access*",
+    "evidence": "1x, first L8: **Security:** Never commit tokens. Use `.env` files (gitignored) or secret managers. ### .env File Pattern ```bash # .env (add to .gitignore)",
+    "reason": "Reference text advising tokens live in gitignored .env or secret managers, or explaining bound secrets; guidance, no credential harvesting. Reviewed."
+  },
+  {
+    "hash": "sha256:c2d9ca006d02d07ee7390ce95eb70a08416e74c5ef30074872f83b85191257c5",
+    "rule_id": "PE3",
+    "file": "skills/cloudflare/references/api/configuration.md",
+    "evidence": "L18: Credential Access: ### .env File Pattern ```bash # .env (add to .gitignore) CLOUDFLARE_API_TOKEN=your-token-here CLOUDFLARE_ACCOUNT_ID=your-account-id ```",
+    "reason": "Reference text advising tokens live in gitignored .env or secret managers, or explaining bound secrets; guidance, no credential harvesting. Reviewed."
+  },
+  {
+    "hash": "rule:PE3:skills/cloudflare/references/api/configuration.md",
+    "rule_id": "PE3",
+    "file": "skills/cloudflare/references/api/configuration.md",
+    "as_rule": true,
+    "message": "*Credential Access*",
+    "evidence": "1x, first L18: ### .env File Pattern ```bash # .env (add to .gitignore) CLOUDFLARE_API_TOKEN=your-token-here CLOUDFLARE_ACCOUNT_ID=your-account-id ```",
+    "reason": "Repeat of the reviewed finding in this same file: placeholder .env example (your-token-here) with gitignore advice. Reviewed."
+  }
+]

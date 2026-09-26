@@ -1,0 +1,19 @@
+{
+  "kind": "mcp",
+  "id": "context7",
+  "target": "npm:@upstash/context7-mcp@4.1.1",
+  "scope": "npm package @upstash/context7-mcp@4.1.1 minus markdown docs; transitive dependencies not scanned",
+  "scanner": "skillspector 2.12.0",
+  "mode": "static (--no-llm) + Claude review of triage",
+  "raw_score": 30,
+  "raw_recommendation": "CAUTION",
+  "active_by_severity": {
+    "MEDIUM": 3,
+    "LOW": 19
+  },
+  "active_high_critical": 0,
+  "suppressed": 4,
+  "completeness": "partial",
+  "verdict": "pass",
+  "date": "2026-09-25"
+}

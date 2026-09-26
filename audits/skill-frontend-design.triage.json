@@ -1,0 +1,11 @@
+[
+  {
+    "hash": "sha256:5bdf3da39b76b2a4f5a89bbfb460a6953aea4c945825cf9101a1203f1436eb84",
+    "rule_id": "AR2",
+    "file": "SKILL.md",
+    "evidence": [
+      "L69: Anti-Refusal Statement: Use active voice as default. A CTA says exactly what happens when it is used: \"Save changes,\" not \"Submit.\" An action keeps the same name through the whole flow"
+    ],
+    "reason": "UX copywriting guidance about button labels and active voice; nothing about refusals or safety. Scanner keyword false positive."
+  }
+]

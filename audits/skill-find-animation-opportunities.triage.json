@@ -1,0 +1,11 @@
+[
+  {
+    "hash": "sha256:84862523f9a6fbd956e96560d7637d2d75fb336a465e564be95fc12c07695014",
+    "rule_id": "P1",
+    "file": "SKILL.md",
+    "evidence": [
+      "L29: Instruction Override: 1. **Never modify source code.** This skill reports; it does not implement. If asked to build a suggestion, hand it off (e.g. `improve-animations plan <descript"
+    ],
+    "reason": "Line is a scope rule telling the agent never to modify source code (read-only skill); it restricts behaviour rather than overriding safety."
+  }
+]

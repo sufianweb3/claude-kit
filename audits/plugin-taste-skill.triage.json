@@ -1,0 +1,32 @@
+[
+  {
+    "hash": "sha256:2b357d5bcade50a778f5b15a92eec10aa3f8538bc09d4fc57f2367b110d2e2d1",
+    "rule_id": "P2",
+    "file": "skills/taste-skill/SKILL.md",
+    "evidence": "L272: Hidden Instructions: * `https://picsum.photos/seed/{descriptive-seed}/{w}/{h}` for placeholder photography (seed should describe the section, e.g. `marrow-cookware-kitchen`) * Actual stock or brand URLs when the brief pro",
+    "reason": "Visible HTML comment used as a labelled placeholder slot example (TODO hero photo); file checked for zero-width or tag characters, none found."
+  },
+  {
+    "hash": "sha256:519a651a78d1a1af8bb0aaf82acf9be339f9af0b0088263c07fbaed28ec2981f",
+    "rule_id": "P2",
+    "file": "skills/taste-skill/SKILL.md",
+    "evidence": "L272: Hidden Instructions: * `https://picsum.photos/seed/{descriptive-seed}/{w}/{h}` for placeholder photography (seed should describe the section, e.g. `marrow-cookware-kitchen`) * Actual stock or brand URLs when the brief pro",
+    "reason": "Visible HTML comment used as a labelled placeholder slot example (TODO hero photo); file checked for zero-width or tag characters, none found."
+  },
+  {
+    "hash": "sha256:b1c18b9be4a09b2f98e84c7358d5dde4359b159ce439fb8bb7ef521bad1ef605",
+    "rule_id": "P6",
+    "file": "skills/imagegen-frontend-web/SKILL.md",
+    "evidence": "L6: Direct Prompt Extraction: description: Elite frontend image-direction skill for generating premium, conversion-aware website design references. CRITICAL OUTPUT RULE \u2014 generate ONE separate horizontal image FOR EVERY section. A",
+    "reason": "Emphatic output rule (one image per section) in the skill's own description and body; no attempt to extract system prompts. Reviewed lines 3, 6, 399."
+  },
+  {
+    "hash": "rule:P6:skills/imagegen-frontend-web/SKILL.md",
+    "rule_id": "P6",
+    "file": "skills/imagegen-frontend-web/SKILL.md",
+    "as_rule": true,
+    "message": "*Direct Prompt Extraction*",
+    "evidence": "2x, first L6: description: Elite frontend image-direction skill for generating premium, conversion-aware website design references. CRITICAL OUTPUT RULE \u2014 generate ONE separa",
+    "reason": "Repeat of the reviewed finding in this same file: Emphatic output rule (one image per section) in the skill's own description and body; no attempt to extract system prompts. Reviewed lines 3, 6, 399."
+  }
+]

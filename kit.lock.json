@@ -1,0 +1,16 @@
+{
+  "plugins": {
+    "core": {
+      "version": "1.0.1",
+      "hash": "c48c0d08f9986db6"
+    },
+    "build": {
+      "version": "1.0.0",
+      "hash": "9c84f4487c1cb203"
+    },
+    "design": {
+      "version": "1.0.0",
+      "hash": "bc49dc5dc2793139"
+    }
+  }
+}

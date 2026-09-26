@@ -1,0 +1,74 @@
+{
+  "name": "sufian-kit",
+  "owner": {
+    "name": "Abu Sufian"
+  },
+  "metadata": {
+    "description": "Personal Claude Code kit: context layer, engineering pipeline and website design toolchain."
+  },
+  "plugins": [
+    {
+      "name": "core",
+      "source": "./plugins/core",
+      "description": "Always on. Router, project memory (STATE, REQUIREMENTS, DECISIONS, HANDOFF, LEARNINGS), learning loop and project bootstrap.",
+      "version": "1.0.1"
+    },
+    {
+      "name": "build",
+      "source": "./plugins/build",
+      "description": "Software work: apps, SaaS, web apps, extensions and APIs. Intake to deploy pipeline, security and library docs.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "design",
+      "source": "./plugins/design",
+      "description": "Website and UI work: creative process, reference boards, era floor standards, components, motion and visual QA.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "superpowers",
+      "source": {
+        "source": "github",
+        "repo": "obra/superpowers",
+        "sha": "5bf4e78011075bcfc0dc295f0724994cd123ee71"
+      },
+      "description": "Engineering workflow skills. Kept for brainstorming, git worktrees, parallel agents, verification-before-completion and writing-skills."
+    },
+    {
+      "name": "ponytail",
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail",
+        "sha": "e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156"
+      },
+      "description": "Simplest-solution discipline: YAGNI, stdlib first, no unrequested abstraction. Has an always-on prompt hook."
+    },
+    {
+      "name": "cloudflare",
+      "source": {
+        "source": "github",
+        "repo": "cloudflare/skills",
+        "sha": "6dc7604903127485e7e4cb26314651ebd4a4df19"
+      },
+      "description": "Cloudflare platform skills plus the Cloudflare MCP: Workers, Pages, D1, R2, KV, Durable Objects and Wrangler."
+    },
+    {
+      "name": "taste-skill",
+      "source": {
+        "source": "github",
+        "repo": "leonxlnx/taste-skill",
+        "sha": "c184364c58658b2f131b4ae8bd3d206cabb3deee"
+      },
+      "description": "Aesthetic direction sets (brutalist, minimalist, soft, redesign, brandkit, image-to-code, imagegen comps)."
+    },
+    {
+      "name": "impeccable",
+      "source": {
+        "source": "github",
+        "repo": "pbakaus/impeccable",
+        "sha": "9d715cc4f5564a990ca8345abfdd5df6dc9b41c8"
+      },
+      "description": "Design critique and polish commands (/impeccable critique, audit, polish) with anti-pattern detection."
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "name": "core",
+  "version": "1.0.1",
+  "description": "Always on. Router, project memory (STATE, REQUIREMENTS, DECISIONS, HANDOFF, LEARNINGS), learning loop and project bootstrap.",
+  "author": {
+    "name": "Abu Sufian"
+  }
+}

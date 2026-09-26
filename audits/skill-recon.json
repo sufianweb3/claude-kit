@@ -1,0 +1,16 @@
+{
+  "kind": "skill",
+  "id": "recon",
+  "target": "sha256:597af64aeaa66dd84df21ab3",
+  "scope": "whole skill folder",
+  "scanner": "skillspector 2.12.0",
+  "mode": "static (--no-llm) + Claude review of triage",
+  "raw_score": 0,
+  "raw_recommendation": "CAUTION",
+  "active_by_severity": {},
+  "active_high_critical": 0,
+  "suppressed": 2,
+  "completeness": "partial",
+  "verdict": "pass",
+  "date": "2026-09-25"
+}
