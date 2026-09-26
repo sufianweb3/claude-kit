@@ -15,7 +15,7 @@ One repo that feeds every project: skills, MCP servers, external plugins, routin
 | **Memory of no** | `[[rejected]]` in kit.toml blocks re-adding things already turned down, with the reason |
 | **Audit gate** | Every skill, subagent, plugin and MCP is scanned by NVIDIA SkillSpector (pinned) and every HIGH/CRITICAL finding needs a written review. Records in `audits/`, summary in `CATALOG.md` |
 | **Subagents** | `auditor` (opus, read-only), `scout` (haiku, read-only), `visual-qa` (sonnet + playwright). Used only where a fresh context pays |
-| **Guardrails** | `kit.py check` + GitHub Action block broken registries, stale generated files, vague routing, orphan folders, inline secrets, unpinned MCPs and missing or stale audits. CI also runs a pinned gitleaks scan over the full history. Locally, `check` fails on any term listed in `.kit-private-terms` (gitignored). Weekly full rescan |
+| **Guardrails** | `kit.py check` + GitHub Action block broken registries, stale generated files, vague routing, orphan folders, inline secrets, unpinned MCPs and missing or stale audits. CI also runs a pinned gitleaks scan over the full history. `check` fails on any private term: locally from `.kit-private-terms` (gitignored), in CI from the `PRIVATE_TERMS` repo secret. Hits show only file:line and term number. Weekly full rescan |
 
 ## Setup (once)
 
