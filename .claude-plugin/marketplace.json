@@ -11,19 +11,19 @@
       "name": "core",
       "source": "./plugins/core",
       "description": "Always on. Router, project memory (STATE, REQUIREMENTS, DECISIONS, HANDOFF, LEARNINGS), learning loop and project bootstrap.",
-      "version": "1.0.1"
+      "version": "1.0.2"
     },
     {
       "name": "build",
       "source": "./plugins/build",
       "description": "Software work: apps, SaaS, web apps, extensions and APIs. Intake to deploy pipeline, security and library docs.",
-      "version": "1.0.0"
+      "version": "1.0.1"
     },
     {
       "name": "design",
       "source": "./plugins/design",
       "description": "Website and UI work: creative process, reference boards, era floor standards, components, motion and visual QA.",
-      "version": "1.0.0"
+      "version": "1.0.1"
     },
     {
       "name": "superpowers",

@@ -10,7 +10,6 @@
   "enabledPlugins": {
     "core@sufian-kit": true,
     "design@sufian-kit": true,
-    "taste-skill@sufian-kit": true,
-    "impeccable@sufian-kit": true
+    "taste-skill@sufian-kit": true
   }
 }
