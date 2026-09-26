@@ -25,6 +25,16 @@ The full list of skills, versions and profiles is in [CATALOG.md](CATALOG.md).
 2. Start a new Claude Code session on the project. The kit's routing tables print at session start.
 3. Run `/kit-init <profile>`. It creates `docs/context/`, adds the kit block to `CLAUDE.md` and fills `STATE.md` from the repo.
 
+**Pin a version (recommended for other users).** The profiles track `main`, so every change to the kit reaches your project at its next session. To stay on a tested release, set the marketplace source in `.claude/settings.json` to a tag:
+
+```json
+"extraKnownMarketplaces": {
+  "sufian-kit": { "source": { "source": "github", "repo": "sufianweb3/claude-kit", "ref": "v1.0.0" } }
+}
+```
+
+Move `ref` to a newer [tag](https://github.com/sufianweb3/claude-kit/tags) when you want its changes. Forking gives you full control: point `repo` at your fork and pull in upstream changes when you choose.
+
 Step by step, with copy-paste prompts: [SETUP.md](SETUP.md).
 
 ## How Claude picks skills

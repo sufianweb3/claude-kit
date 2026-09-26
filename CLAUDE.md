@@ -31,6 +31,18 @@ python scripts/kit.py drift                # pinned upstreams vs their latest co
 python scripts/kit.py audit <id> | --stale # SkillSpector scan + triage gate (see kit-maintainer)
 ```
 
+## Releases
+
+- `install/profiles/` track `main` (the owner's own projects). Other users pin a tag with `"ref": "vX.Y.Z"` in the marketplace source (README, Quick start).
+- Tag after each merged change that bumps a plugin version (`kit.lock.json` changed): tag the merge commit on `main` as `vMAJOR.MINOR.PATCH`.
+  - Patch: fixes and wording inside existing skills, commands or hooks.
+  - Minor: added or changed skills, subagents, MCPs, companion plugins or commands.
+  - Major: breaking changes (a removed skill, plugin or profile, or a setup step that changed).
+- Annotated tag listing the plugin versions:
+  `git tag -a vX.Y.Z <merge sha> -m "claude-kit vX.Y.Z" -m "Plugins: core A, build B, design C."` then `git push origin vX.Y.Z`.
+  Web sessions cannot push tags: create it on GitHub instead (Releases, Draft a new release, new tag on `main`).
+- Never move or delete a published tag; release a new one. Update the `ref` example in README.md to the latest tag.
+
 ## Style
 - Reply short: what changed, plugin + version, env vars needed, projects affected.
 - No em dashes. No comma before "and" in lists.
