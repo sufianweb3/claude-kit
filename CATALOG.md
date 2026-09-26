@@ -47,40 +47,42 @@
 
 ## Audits (SkillSpector + reviewed baseline)
 
-| Item | Status | Score (raw) | Active H/C | Suppressed | Scanned |
-|---|---|---|---|---|---|
-| skill `context-keeper` | PASS | 7 | 0 | 0 | 2026-09-26 |
-| skill `learning` | PASS | 0 | 0 | 0 | 2026-09-25 |
-| skill `i-have-adhd` | PASS | 0 | 0 | 0 | 2026-09-25 |
-| skill `intake` | PASS | 0 | 0 | 0 | 2026-09-25 |
-| skill `recon` | PASS | 0 | 0 | 2 | 2026-09-25 |
-| skill `planning` | PASS | 0 | 0 | 0 | 2026-09-25 |
-| skill `build-tdd` | PASS | 0 | 0 | 0 | 2026-09-25 |
-| skill `audit` | PASS | 0 | 0 | 0 | 2026-09-26 |
-| skill `debug` | PASS | 0 | 0 | 0 | 2026-09-25 |
-| skill `deploy` | PASS | 0 | 0 | 0 | 2026-09-25 |
-| skill `security` | PASS | 0 | 0 | 0 | 2026-09-25 |
-| skill `website-builder` | PASS | 7 | 0 | 0 | 2026-09-25 |
-| skill `ui-standards` | PASS | 24 | 0 | 0 | 2026-09-26 |
-| skill `ui-mate` | PASS | 10 | 0 | 0 | 2026-09-25 |
-| skill `frontend-design` | PASS | 0 | 0 | 1 | 2026-09-25 |
-| skill `emil-design-eng` | PASS | 0 | 0 | 0 | 2026-09-25 |
-| skill `apple-design` | PASS | 0 | 0 | 0 | 2026-09-25 |
-| skill `animation-vocabulary` | PASS | 0 | 0 | 0 | 2026-09-25 |
-| skill `animate` | PASS | 0 | 0 | 0 | 2026-09-25 |
-| skill `find-animation-opportunities` | PASS | 0 | 0 | 1 | 2026-09-25 |
-| skill `review-animations` | PASS | 0 | 0 | 3 | 2026-09-25 |
-| skill `prototype` | PASS | 0 | 0 | 1 | 2026-09-25 |
-| agent `auditor` | PASS | 0 | 0 | 0 | 2026-09-25 |
-| agent `scout` | PASS | 0 | 0 | 0 | 2026-09-25 |
-| agent `visual-qa` | PASS | 0 | 0 | 0 | 2026-09-25 |
-| plugin `superpowers` | PASS | 80 | 0 | 23 | 2026-09-25 |
-| plugin `ponytail` | PASS | 15 | 0 | 0 | 2026-09-25 |
-| plugin `cloudflare` | PASS | 88 | 0 | 25 | 2026-09-25 |
-| plugin `taste-skill` | PASS | 33 | 0 | 5 | 2026-09-25 |
-| plugin `impeccable` | PASS | 83 | 0 | 14 | 2026-09-26 |
-| mcp `context7` | PASS | 30 | 0 | 4 | 2026-09-25 |
-| mcp `playwright` | PASS | 15 | 0 | 0 | 2026-09-25 |
+REVIEWED means every HIGH/CRITICAL finding was read and justified in audits/*.triage.json. It is not a safety guarantee. Scanner verdicts are static and include false positives from documentation.
+
+| Item | Status | Scanner verdict | Score (raw) | Active H/C | Suppressed | Scanned |
+|---|---|---|---|---|---|---|
+| skill `context-keeper` | REVIEWED | CAUTION | 7 | 0 | 0 | 2026-09-26 |
+| skill `learning` | REVIEWED | CAUTION | 0 | 0 | 0 | 2026-09-25 |
+| skill `i-have-adhd` | REVIEWED | CAUTION | 0 | 0 | 0 | 2026-09-25 |
+| skill `intake` | REVIEWED | CAUTION | 0 | 0 | 0 | 2026-09-25 |
+| skill `recon` | REVIEWED | CAUTION | 0 | 0 | 2 | 2026-09-25 |
+| skill `planning` | REVIEWED | CAUTION | 0 | 0 | 0 | 2026-09-25 |
+| skill `build-tdd` | REVIEWED | CAUTION | 0 | 0 | 0 | 2026-09-25 |
+| skill `audit` | REVIEWED | SAFE | 0 | 0 | 0 | 2026-09-26 |
+| skill `debug` | REVIEWED | SAFE | 0 | 0 | 0 | 2026-09-25 |
+| skill `deploy` | REVIEWED | SAFE | 0 | 0 | 0 | 2026-09-25 |
+| skill `security` | REVIEWED | SAFE | 0 | 0 | 0 | 2026-09-25 |
+| skill `website-builder` | REVIEWED | CAUTION | 7 | 0 | 0 | 2026-09-25 |
+| skill `ui-standards` | REVIEWED | CAUTION | 24 | 0 | 0 | 2026-09-26 |
+| skill `ui-mate` | REVIEWED | CAUTION | 10 | 0 | 0 | 2026-09-25 |
+| skill `frontend-design` | REVIEWED | SAFE | 0 | 0 | 1 | 2026-09-25 |
+| skill `emil-design-eng` | REVIEWED | CAUTION | 0 | 0 | 0 | 2026-09-25 |
+| skill `apple-design` | REVIEWED | CAUTION | 0 | 0 | 0 | 2026-09-25 |
+| skill `animation-vocabulary` | REVIEWED | SAFE | 0 | 0 | 0 | 2026-09-25 |
+| skill `animate` | REVIEWED | CAUTION | 0 | 0 | 0 | 2026-09-25 |
+| skill `find-animation-opportunities` | REVIEWED | SAFE | 0 | 0 | 1 | 2026-09-25 |
+| skill `review-animations` | REVIEWED | CAUTION | 0 | 0 | 3 | 2026-09-25 |
+| skill `prototype` | REVIEWED | SAFE | 0 | 0 | 1 | 2026-09-25 |
+| agent `auditor` | REVIEWED | SAFE | 0 | 0 | 0 | 2026-09-25 |
+| agent `scout` | REVIEWED | SAFE | 0 | 0 | 0 | 2026-09-25 |
+| agent `visual-qa` | REVIEWED | SAFE | 0 | 0 | 0 | 2026-09-25 |
+| plugin `superpowers` | REVIEWED | DO_NOT_INSTALL | 80 | 0 | 23 | 2026-09-25 |
+| plugin `ponytail` | REVIEWED | CAUTION | 15 | 0 | 0 | 2026-09-25 |
+| plugin `cloudflare` | REVIEWED | DO_NOT_INSTALL | 88 | 0 | 25 | 2026-09-25 |
+| plugin `taste-skill` | REVIEWED | CAUTION | 33 | 0 | 5 | 2026-09-25 |
+| plugin `impeccable` | REVIEWED | DO_NOT_INSTALL | 83 | 0 | 14 | 2026-09-26 |
+| mcp `context7` | REVIEWED | CAUTION | 30 | 0 | 4 | 2026-09-25 |
+| mcp `playwright` | REVIEWED | CAUTION | 15 | 0 | 0 | 2026-09-25 |
 
 ## Rejected (do not re-add without a new reason)
 
