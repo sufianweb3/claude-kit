@@ -16,6 +16,7 @@ This repo is a Claude Code **plugin marketplace**. Every project the user builds
 | `audits/*.triage.json` | Reviewed false positives | ✅ `reason` fields only |
 | `plugins/<p>/agents/` | Subagents | ✅ body + model/tools |
 | `scripts/kit.py` | Build, check, vendor, scaffold | ✅ carefully |
+| `README.md`, `SETUP.md`, `AGENTS.md`, `llms.txt`, `docs/` | Docs for people and AI agents | ✅ keep in sync when plugins, profiles or commands change |
 | `.claude-plugin/`, `plugins/*/.claude-plugin/`, `plugins/*/.mcp.json`, `plugins/*/INDEX.md`, `plugins/*/hooks/hooks.json`, `install/profiles/`, `CATALOG.md`, `kit.lock.json` | Generated | ❌ never |
 
 ## Commands
