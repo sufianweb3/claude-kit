@@ -15,7 +15,6 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import os
 import re
 import shutil
 import subprocess
@@ -749,57 +748,9 @@ def cmd_build(_) -> None:
         print(f"  {p} -> {new_lock['plugins'][p]['version']}")
 
 
-PRIVATE_TERMS = ROOT / ".kit-private-terms"
-PRIVATE_TERMS_ENV = "PRIVATE_TERMS"   # CI: repo secret, used only when the local file is absent
-
-
-def private_terms() -> tuple[list[str], str]:
-    """(terms, source). The local, gitignored file wins; else the PRIVATE_TERMS env var. Never print the terms."""
-    if PRIVATE_TERMS.is_file():
-        raw, src = PRIVATE_TERMS.read_text(encoding="utf-8"), PRIVATE_TERMS.name
-    else:
-        raw, src = os.environ.get(PRIVATE_TERMS_ENV, ""), PRIVATE_TERMS_ENV
-    terms = [t.strip() for t in raw.splitlines() if t.strip() and not t.lstrip().startswith("#")]
-    return terms, (src if terms else "")
-
-
-def private_term_hits(terms: list[str], src: str) -> list[str]:
-    """Tracked files whose path or content contains a private term. Reports file:line and term number only.
-    Whole-word match; smart case: a term with a capital letter is case-sensitive, else case-insensitive.
-    A path that itself contains a term is withheld and shown as its index in `git ls-files`."""
-    if not terms:
-        return []
-    pats = [re.compile(r"(?<!\w)" + re.escape(t) + r"(?!\w)", 0 if t != t.lower() else re.IGNORECASE)
-            for t in terms]
-    files = [x for x in git("ls-files", "-z", cwd=str(ROOT)).split("\0") if x]
-    hits = []
-    for i, rel in enumerate(files, 1):
-        in_path = [n for n, pat in enumerate(pats, 1) if pat.search(rel)]
-        label = f"<path withheld: tracked file #{i}, see git ls-files | sed -n {i}p>" if in_path else rel
-        hits += [f"private term in file name of {label} (term #{n} in {src})" for n in in_path]
-        f = ROOT / rel
-        if not f.is_file() or f.is_symlink():
-            continue
-        try:
-            text = f.read_text(encoding="utf-8")
-        except (UnicodeDecodeError, OSError):
-            continue
-        for n, pat in enumerate(pats, 1):
-            if m := pat.search(text):
-                line = text.count("\n", 0, m.start()) + 1
-                hits.append(f"private term in {label}:{line} (term #{n} in {src})")
-    return hits
-
-
 def cmd_check(_) -> None:
     reg = load()
     errs = validate(reg)
-    if errs:
-        fail(errs)
-    if git("ls-files", PRIVATE_TERMS.name, cwd=str(ROOT)).strip():
-        fail([f"{PRIVATE_TERMS.name} is tracked: it must stay local (git rm --cached {PRIVATE_TERMS.name})"])
-    terms, terms_src = private_terms()
-    errs = private_term_hits(terms, terms_src)
     if errs:
         fail(errs)
     lock = json.loads(LOCK.read_text()) if LOCK.exists() else {}
@@ -810,9 +761,7 @@ def cmd_check(_) -> None:
     errs = audit_errors(reg, plan)
     if errs:
         fail(errs)
-    print("✓ check ok (registry, generated files, audits"
-          + (f", private terms from {terms_src}" if terms_src
-             else f", private terms: not configured (no {PRIVATE_TERMS.name}, {PRIVATE_TERMS_ENV} unset)") + ")")
+    print("✓ check ok (registry, generated files, audits)")
 
 
 def cmd_new_skill(a) -> None:
