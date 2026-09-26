@@ -440,15 +440,19 @@ def catalog_md(reg: dict, lock: dict, plan: "Plan") -> str:
             + (f"  \n  **Accepted risk:** {m['risk']}" if m.get("risk") else "") for m in reg.get("mcp", [])] or ["None."]
     out += ["", "## External plugins", ""]
     out += [f"- `{x['id']}` github:{x['repo']} @ {x.get('sha', 'unpinned')[:8]}" + (f"  \n  **Accepted risk:** {x['risk']}" if x.get("risk") else "") for x in reg.get("external", [])] or ["None."]
-    out += ["", "## Audits (SkillSpector + reviewed baseline)", "", "| Item | Status | Score (raw) | Active H/C | Suppressed | Scanned |", "|---|---|---|---|---|---|"]
+    out += ["", "## Audits (SkillSpector + reviewed baseline)", "",
+            "REVIEWED means every HIGH/CRITICAL finding was read and justified in audits/*.triage.json. "
+            "It is not a safety guarantee. Scanner verdicts are static and include false positives from documentation.", "",
+            "| Item | Status | Scanner verdict | Score (raw) | Active H/C | Suppressed | Scanned |", "|---|---|---|---|---|---|---|"]
     for kind, item in audit_items(reg):
         rec = read_record(kind, item["id"])
         if not rec:
-            out.append(f"| {kind} `{item['id']}` | MISSING | - | - | - | - |")
+            out.append(f"| {kind} `{item['id']}` | MISSING | - | - | - | - | - |")
             continue
         fresh = rec.get("target") == audit_target(kind, item, plan)
-        st = ("MANUAL" if rec.get("verdict") == "manual" else rec.get("verdict", "?").upper()) + ("" if fresh else " (STALE)")
-        out.append(f"| {kind} `{item['id']}` | {st} | {rec.get('raw_score', '-')} | {rec.get('active_high_critical', '-')} | {rec.get('suppressed', '-')} | {rec.get('date', '-')} |")
+        v = rec.get("verdict", "?")
+        st = {"manual": "MANUAL", "pass": "REVIEWED"}.get(v, v.upper()) + ("" if fresh else " (STALE)")
+        out.append(f"| {kind} `{item['id']}` | {st} | {rec.get('raw_recommendation') or '-'} | {rec.get('raw_score', '-')} | {rec.get('active_high_critical', '-')} | {rec.get('suppressed', '-')} | {rec.get('date', '-')} |")
     out += ["", "## Rejected (do not re-add without a new reason)", "", "| Item | Date | Reason |", "|---|---|---|"]
     out += [f"| `{r['id']}` | {r['date']} | {r['reason']} |" for r in reg.get("rejected", [])]
     return "\n".join(out)
