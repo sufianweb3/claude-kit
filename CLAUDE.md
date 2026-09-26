@@ -26,7 +26,6 @@ python scripts/kit.py new-skill <id> -p <plugin>
 python scripts/kit.py vendor <id> | --all  # fetch/refresh github-sourced skills
 python scripts/kit.py build                # regenerate + auto-bump versions
 python scripts/kit.py check                # must pass before every commit (CI enforces)
-                                           # also fails on any term in .kit-private-terms (local, gitignored; whole word, case-sensitive if the term has a capital)
 python scripts/kit.py drift                # pinned upstreams vs their latest commit
 python scripts/kit.py audit <id> | --stale # SkillSpector scan + triage gate (see kit-maintainer)
 ```

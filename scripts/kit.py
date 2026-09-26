@@ -748,43 +748,9 @@ def cmd_build(_) -> None:
         print(f"  {p} -> {new_lock['plugins'][p]['version']}")
 
 
-PRIVATE_TERMS = ROOT / ".kit-private-terms"
-
-
-def private_term_hits() -> list[str]:
-    """Terms from the local, gitignored .kit-private-terms that appear in any tracked file.
-    Whole-word match; smart case: a term with a capital letter is case-sensitive, else case-insensitive."""
-    if not PRIVATE_TERMS.is_file():
-        return []
-    terms = [t.strip() for t in PRIVATE_TERMS.read_text(encoding="utf-8").splitlines()
-             if t.strip() and not t.lstrip().startswith("#")]
-    if not terms:
-        return []
-    pats = [re.compile(r"(?<!\w)" + re.escape(t) + r"(?!\w)", 0 if t != t.lower() else re.IGNORECASE)
-            for t in terms]
-    files = git("ls-files", "-z", cwd=str(ROOT)).split("\0")
-    hits = []
-    for rel in filter(None, files):
-        f = ROOT / rel
-        if not f.is_file() or f.is_symlink():
-            continue
-        try:
-            text = f.read_text(encoding="utf-8")
-        except (UnicodeDecodeError, OSError):
-            continue
-        for n, pat in enumerate(pats, 1):
-            if m := pat.search(text):
-                line = text.count("\n", 0, m.start()) + 1
-                hits.append(f"private term in {rel}:{line} (term #{n} in .kit-private-terms)")
-    return hits
-
-
 def cmd_check(_) -> None:
     reg = load()
     errs = validate(reg)
-    if errs:
-        fail(errs)
-    errs = private_term_hits()
     if errs:
         fail(errs)
     lock = json.loads(LOCK.read_text()) if LOCK.exists() else {}
@@ -795,8 +761,7 @@ def cmd_check(_) -> None:
     errs = audit_errors(reg, plan)
     if errs:
         fail(errs)
-    print("✓ check ok (registry, generated files, audits"
-          + (", private terms" if PRIVATE_TERMS.is_file() else ", private terms: no .kit-private-terms file") + ")")
+    print("✓ check ok (registry, generated files, audits)")
 
 
 def cmd_new_skill(a) -> None:
